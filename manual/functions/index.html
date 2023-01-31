@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://www.drlx.com/manual/functions/" rel="canonical"/>
+<link href="../variables-and-scoping/" rel="prev"/>
+<link href="../unicode-input/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.7" name="generator"/>
+<title>函数 - Deep Reinforcement Learning</title>
+<link href="../../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../css/extra.css" rel="stylesheet"/>
+<link href="../../css/hint.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="light-blue" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#_1">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="Deep Reinforcement Learning" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Deep Reinforcement Learning
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              函数
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+      Home
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../stability/2022/">
+        专题分析
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../eec/">
+      EEC
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../math-model/">
+        PowerModule
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../getting-started/">
+        Julia
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../markdown/figure/">
+        Help
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../about/">
+      About
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Deep Reinforcement Learning" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Deep Reinforcement Learning
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          专题分析
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          专题分析
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stability/2022/">
+        建苏直流
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stability/GBT40615/">
+        电力系统电压稳定评价导则
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../eec/">
+        EEC
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          PowerModule
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          PowerModule
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../math-model/">
+        The PowerModels Mathematical Model
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Julia
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Julia
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../getting-started/">
+        入门
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../variables/">
+        变量
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../variables-and-scoping/">
+        变量作用域
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          函数
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        函数
+      </a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    参数传递行为
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    参数类型声明
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#return">
+    return 关键字
+  </a>
+<nav aria-label="return 关键字" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    返回类型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nothing">
+    返回 nothing
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5">
+    操作符也是函数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6">
+    具有特殊名称的操作符
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    匿名函数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8">
+    元组
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9">
+    具名元组
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10">
+    解构赋值和多返回值
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_11">
+    参数解构
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_12">
+    变参函数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_13">
+    可选参数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_14">
+    关键字参数
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_15">
+    默认值作用域的计算
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#do">
+    函数参数中的 Do 结构
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_16">
+    函数的复合与链式调用
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_17">
+    向量化函数的点语法
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_18">
+    更多阅读
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../unicode-input/">
+        Unicode输入表
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Help
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Help
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/figure/">
+        增加图表
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/common/">
+        常用扩展
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/txtbar/">
+        进度条
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../about/">
+        About
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="_1"><a href="@id man-functions">函数</a><a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
+<p>在 Julia 里，函数是将参数值组成的元组映射到返回值的一个对象。Julia 的函数不是纯粹的数学函数，因为这些函数可以改变程序的全局状态并且可能受其影响。在Julia中定义函数的基本语法是：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="go">f (generic function with 1 method)</span>
+</code></pre></div>
+<p>这个函数接收两个参数 <code class="highlight">x</code> 和 <code class="highlight">y</code> 并返回最后一个表达式的值，这里是 <code class="highlight">x + y</code>。</p>
+<p>在 Julia 中定义函数还有第二种更简洁的语法。上述的传统函数声明语法等效于以下紧凑性的“赋值形式”：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="go">f (generic function with 1 method)</span>
+</code></pre></div>
+<p>尽管函数可以是复合表达式 (见 <a href="@ref man-compound-expressions">复合表达式</a>)，但在赋值形式下，函数体必须是一个一行的表达式。简短的函数定义在 Julia 中是很常见的。非常惯用的短函数语法大大减少了打字和视觉方面的干扰。</p>
+<p>使用传统的括号语法调用函数：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="go">5</span>
+</code></pre></div>
+<p>没有括号时，表达式 <code class="highlight">f</code> 指的是函数对象，可以像任何值一样被传递：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="go">5</span>
+</code></pre></div>
+<p>和变量名一样，Unicode 字符也可以用作函数名：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">∑</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="go">∑ (generic function with 1 method)</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">∑</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="go">5</span>
+</code></pre></div>
+<h2 id="_2">参数传递行为<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<p>Julia 函数参数遵循有时称为 “pass-by-sharing” 的约定，这意味着变量在被传递给函数时其值并不会被复制。函数参数本身充当新的变量绑定（指向变量值的新地址），它们所指向的值与所传递变量的值完全相同。调用者可以看到对函数内可变值（如数组）的修改。这与 Scheme，大多数 Lisps，Python，Ruby 和 Perl 以及其他动态语言中的行为相同。</p>
+<h2 id="_3">参数类型声明<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
+<p>您可以通过将 <code class="highlight">::TypeName</code> 附加到参数名称来声明函数参数的类型，就像 Julia 中的 <a href="@ref Type-Declarations">类型声明</a> 一样。
+例如，以下函数递归计算 <a href="https://en.wikipedia.org/wiki/Fibonacci_number">斐波那契数列</a>：
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">≤</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+并且 <code class="highlight">::Integer</code> 规范意味着它只有在 <code class="highlight">n</code> 是 <a href="@ref man-abstract-types">抽象</a> <code class="highlight">Integer</code> 类型的子类型时才可调用。</p>
+<p>参数类型声明**通常对性能没有影响**：无论声明什么参数类型（如果有），Julia 都会为实际参数类型编译函数的特例版本。 例如，调用 <code class="highlight">fib(1)</code> 将触发专门为 <code class="highlight">Int</code> 参数优化的特例化的<code class="highlight">fib</code> 的编译，它会在 <code class="highlight">fib(7)</code> 或 <code class="highlight">fib(15)</code> 调用时重新使用。 （参数类型声明不触发额外的编译器特化的情况很少；请参阅：<a href="@ref Be-aware-of-when-Julia-avoids-specializing">注意 Julia 何时不触发特例化</a>。）在 Julia 中声明参数类型的最常见原因是：</p>
+<ul>
+<li><strong>派发：</strong> 如 <a href="@ref">方法</a> 中所述，对于不同的参数类型，你可以有不同版本（“方法”）的函数，在这种情况下，参数类型用于确定调用哪个版本的函数。例如，你可以使用 <a href="https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula">Binet 公式</a> 实现一个完全不同的算法 <code class="highlight">fib(x::Number) = ...</code>，该算法扩展为了非整数值，适用于任何 <code class="highlight">Number</code> 类型。</li>
+<li><strong>正确性：</strong> 如果函数只为某些参数类型返回正确的结果，则类型声明会很有用。例如，如果我们省略参数类型并写成 <code class="highlight">fib(n) = n ≤ 2 ? one(n) : fib(n-1) + fib(n-2)</code>，然后<code class="highlight">fib(1.5)</code>会默默地给我们无意义的答案<code class="highlight"><span class="mf">1.0</span></code>。</li>
+<li><strong>清晰性：</strong> 类型声明可以作为一种关于预期参数的文档形式。</li>
+</ul>
+<p>但是，<strong>过分限制参数类型是常见的错误</strong>，这会不必要地限制函数的适用性，并防止它在未预料到的情况下被重用。例如，上面的 <code class="highlight">fib(n::Integer)</code> 函数同样适用于 <code class="highlight">Int</code> 参数（机器整数）和 <code class="highlight">BigInt</code> 任意精度整数（参见 <a href="@ref BigFloats-and-BigInts">BigFloats 和 BigInts</a>），这样十分有效，因为斐波那契数以指数方式快速增长，并且会迅速溢出任何固定精度类型，如 <code class="highlight">Int</code>（参见 <a href="@ref">溢出行为</a>）。但是，如果我们将函数声明为 <code class="highlight">fib(n::Int)</code>，那么 <code class="highlight">BigInt</code> 的应用就会被阻止。通常，应该对参数使用最通用的适用抽象类型，并且**如有不确定，就省略参数类型**。如果有必要，你可以随时添加参数类型规范，并且不会因为省略它们而牺牲性能或功能。</p>
+<h2 id="return"><code class="highlight"><span class="k">return</span></code> 关键字<a class="headerlink" href="#return" title="Permanent link">¶</a></h2>
+<p>函数返回的值是最后计算的表达式的值，默认情况下，它是函数定义主体中的最后一个表达式。在上一小节的示例函数 <code class="highlight">f</code> 中，返回值是表达式的 <code class="highlight">x + y</code> 值。与在 C 语言和大多数其他命令式或函数式语言中一样，<code class="highlight"><span class="k">return</span></code> 关键字会让函数立即返回，从而提供返回值的表达式：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">function</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="k">end</span>
+</code></pre></div>
+<p>由于函数定义可以输入到交互式会话中，因此可以很容易的比较这些定义：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="go">f (generic function with 1 method)</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="go">g (generic function with 1 method)</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="go">5</span>
+<a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a>
+<a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="go">6</span>
+</code></pre></div>
+<p>当然，在一个单纯的线性执行的函数体内，例如 <code class="highlight">g</code>，使用 <code class="highlight"><span class="k">return</span></code> 是没有意义的，因为表达式 <code class="highlight">x + y</code> 永远不会被执行到，我们可以简单地把 <code class="highlight">x * y</code> 写为最后一个表达式从而省略掉 <code class="highlight"><span class="k">return</span></code>。
+然而在使用其他控制流程的函数体内，<code class="highlight"><span class="k">return</span></code> 却是有用的。
+例如，在计算两条边长分别为 <code class="highlight">x</code> 和 <code class="highlight">y</code> 的三角形的斜边长度时可以避免溢出：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">           </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">           </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">               </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="o">/</span><span class="n">x</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">               </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">r</span><span class="p">)</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">           </span><span class="k">if</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">               </span><span class="k">return</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">           </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">/</span><span class="n">y</span>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">y</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="o">*</span><span class="n">r</span><span class="p">)</span>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="go">hypot (generic function with 1 method)</span>
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">hypot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="go">5.0</span>
+</code></pre></div>
+<p>这个函数有三个可能的返回处，返回三个不同表达式的值，具体取决于 <code class="highlight">x</code> 和 <code class="highlight">y</code> 的值。 最后一行的 <code class="highlight"><span class="k">return</span></code> 可以省略，因为它是最后一个表达式。</p>
+<h3 id="_4">返回类型<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
+<p>也可以使用 <code class="highlight">::</code> 运算符在函数声明中指定返回类型。 这可以将返回值转换为指定的类型。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="o">::</span><span class="kt">Int8</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="go">Int8</span>
+</code></pre></div>
+<p>这个函数将忽略 <code class="highlight">x</code> 和 <code class="highlight">y</code> 的类型，返回 <code class="highlight">Int8</code> 类型的值。有关返回类型的更多信息，请参见<a href="@ref Type-Declarations">类型声明</a>。</p>
+<p>返回类型声明在 Julia 中**很少使用**：通常，你应该编写“类型稳定”的函数，Julia 的编译器可以在其中自动推断返回类型。更多信息请参阅 <a href="@ref man-performance-tips">性能提示</a> 一章。</p>
+<h3 id="nothing">返回 nothing<a class="headerlink" href="#nothing" title="Permanent link">¶</a></h3>
+<p>对于不需要任何返回值的函数（只用来产生副作用的函数）， Julia 中的写法为返回值<a href="@ref"><code class="highlight">nothing</code></a>:</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">function</span><span class="w"> </span><span class="n">printx</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"x = </span><span class="si">$x</span><span class="s">"</span><span class="p">)</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">nothing</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="k">end</span>
+</code></pre></div>
+<p>这在某种意义上是一个“惯例”，在 Julia 中 <code class="highlight">nothing</code> 不是一个关键字，而是 <code class="highlight">Nothing</code> 类型的一个单例（singleton）。
+也许你已经注意到 <code class="highlight">printx</code> 函数有点不自然，因为 <code class="highlight">println</code> 实际上已经会返回 <code class="highlight">nothing</code>，所以 <code class="highlight"><span class="k">return</span></code> 语句是多余的。</p>
+<p>有两种比 <code class="highlight"><span class="k">return</span><span class="w"> </span><span class="nv">nothing</span></code> 更短的写法：一种是直接写 <code class="highlight"><span class="k">return</span></code> 这会隐式的返回 <code class="highlight">nothing</code>。
+另一种是在函数的会后一行写上 <code class="highlight">nothing</code>，因为函数会隐式的返回最后一个表达式的值。
+三种写法使用哪一种取决于代码风格的偏好。</p>
+<h2 id="_5">操作符也是函数<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
+<p>在 Julia中，大多数操作符只不过是支持特殊语法的函数（ <code class="highlight">&amp;&amp;</code> 和<code class="highlight">||</code> 等具有特殊评估语义的操作符除外，他们不能是函数，因为<a href="@ref">短路求值</a>要求在计算整个表达式的值之前不计算每个操作数）。因此，您也可以使用带括号的参数列表来使用它们，就和任何其他函数一样：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="go">6</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="go">6</span>
+</code></pre></div>
+<p>中缀表达式和函数形式完全等价。—— 事实上，前一种形式会被编译器转换为函数调用。这也意味着你可以对操作符，例如 <a href="@ref"><code class="highlight">+</code></a> 和 <a href="@ref"><code class="highlight">*</code></a> ，进行赋值和传参，就像其它函数传参一样。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="p">;</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="go">6</span>
+</code></pre></div>
+<p>然而，函数以<code class="highlight">f</code>命名时不再支持中缀表达式。</p>
+<h2 id="_6">具有特殊名称的操作符<a class="headerlink" href="#_6" title="Permanent link">¶</a></h2>
+<p>有一些特殊的表达式对应的函数调用没有显示的函数名称，它们是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">函数调用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="highlight">[A B C ...]</code></td>
+<td align="left"><a href="@ref"><code class="highlight">hcat</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight">[A; B; C; ...]</code></td>
+<td align="left"><a href="@ref"><code class="highlight">vcat</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight">[A B; C D; ...]</code></td>
+<td align="left"><a href="@ref"><code class="highlight">hvcat</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight">A'</code></td>
+<td align="left"><a href="@ref"><code class="highlight">adjoint</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight"><span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">]</span></code></td>
+<td align="left"><a href="@ref"><code class="highlight">getindex</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight"><span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span></code></td>
+<td align="left"><a href="@ref"><code class="highlight">setindex!</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight">A.n</code></td>
+<td align="left"><a href="@ref Base.getproperty"><code class="highlight">getproperty</code></a></td>
+</tr>
+<tr>
+<td align="left"><code class="highlight">A.n = x</code></td>
+<td align="left"><a href="@ref Base.setproperty!"><code class="highlight">setproperty!</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_7"><a href="@id man-anonymous-functions">匿名函数</a><a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
+<p>函数在Julia里是<a href="https://en.wikipedia.org/wiki/First-class_citizen">一等公民</a>：可以指定给变量，并使用标准函数调用语法通过被指定的变量调用。函数可以用作参数，也可以当作返回值。函数也可以不带函数名称地匿名创建，使用语法如下：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="go">#1 (generic function with 1 method)</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">           </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="go">#3 (generic function with 1 method)</span>
+</code></pre></div>
+<p>这样就创建了一个接受一个参数 <code class="highlight">x</code> 并返回当前值的多项式 <code class="highlight">x^2+2x-1</code> 的函数。注意结果是个泛型函数，但是带了编译器生成的连续编号的名字。</p>
+<p>匿名函数最主要的用法是传递给接收函数作为参数的函数。一个经典的例子是 <a href="@ref"><code class="highlight">map</code></a> ，为数组的每个元素应用一次函数，然后返回一个包含结果值的新数组：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">round</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.7</span><span class="p">])</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="go">3-element Vector{Float64}:</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="go"> 1.0</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="go"> 4.0</span>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="go"> 2.0</span>
+</code></pre></div>
+<p>如果做为第一个参数传递给 <a href="@ref"><code class="highlight">map</code></a> 的转换函数已经存在，那直接使用函数名称是没问题的。但是通常要使用的函数还没有定义好，这样使用匿名函数就更加方便：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="go">3-element Vector{Int64}:</span>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="go">  2</span>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="go"> 14</span>
+<a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="go"> -2</span>
+</code></pre></div>
+<p>接受多个参数的匿名函数写法可以使用语法 <code class="highlight"><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="o">-&gt;</span><span class="mi">2</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">-</span><span class="n">z</span></code>，而无参匿名函数写作 <code class="highlight"><span class="p">()</span><span class="o">-&gt;</span><span class="mi">3</span></code> 。无参函数的这种写法看起来可能有些奇怪，不过它对于延迟计算很有必要。这种用法会把代码块包进一个无参函数中，后续把它当做 <code class="highlight">f</code> 调用。</p>
+<p>例如，考虑对 <a href="@ref"><code class="highlight">get</code></a> 的调用：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">get</span><span class="p">(</span><span class="n">dict</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="c"># default value calculated here</span>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="n">time</span><span class="p">()</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="k">end</span>
+</code></pre></div>
+<p>上面的代码等效于使用包含代码的匿名函数调用<code class="highlight">get</code>。 被包围在do和end之间，如下所示</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">get</span><span class="p">(()</span><span class="o">-&gt;</span><span class="n">time</span><span class="p">(),</span><span class="w"> </span><span class="n">dict</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+<p>这里对 <a href="@ref"><code class="highlight">time</code></a> 的调用，被包裹了它的一个无参数的匿名函数延迟了。该匿名函数只当 <code class="highlight">dict</code> 缺少被请求的键时，才被调用。</p>
+<h2 id="_8">元组<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
+<p>Julia 有一个和函数参数与返回值密切相关的内置数据结构叫做元组（<em>tuple</em>）。
+一个元组是一个固定长度的容器，可以容纳任何值，但不可以被修改(是*immutable*的)。
+元组通过圆括号和逗号来构造，其内容可以通过索引来访问：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="go">(1, 2)</span>
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a>
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="go">(1,)</span>
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a>
+<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="s">"hello"</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+<a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="go">(0.0, "hello", 42)</span>
+<a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a>
+<a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="go">"hello"</span>
+</code></pre></div>
+<p>注意，长度为1的元组必须使用逗号 <code class="highlight">(1,)</code>，而 <code class="highlight">(1)</code> 只是一个带括号的值。<code class="highlight">()</code> 表示空元组（长度为0）。</p>
+<h2 id="_9">具名元组<a class="headerlink" href="#_9" title="Permanent link">¶</a></h2>
+<p>元组的元素可以有名字，这时候就有了*具名元组*：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="go">(a = 2, b = 3)</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="go">2</span>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">.</span><span class="n">a</span>
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="go">2</span>
+</code></pre></div>
+<p>具名元组和元组十分类似，区别在于除了一般的下标语法（<code class="highlight">x[1]</code>），还可以使用点运算符语法（<code class="highlight">x.a</code>）通过元素的名字来访问它的元素。</p>
+<h2 id="_10"><a href="@id destructuring-assignment">解构赋值和多返回值</a><a class="headerlink" href="#_10" title="Permanent link">¶</a></h2>
+<p>逗号分隔的变量列表（可选地用括号括起来）可以出现在赋值的左侧：右侧的值通过迭代并依次分配给每个变量来_解构_：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="go">1:3</span>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="go">2</span>
+</code></pre></div>
+<p>右边的值应该是一个至少与左边的变量数量一样长的迭代器（参见<a href="@ref man-interface-iteration">迭代接口</a>）（迭代器的任何多余元素会被忽略）。</p>
+<p>可用于通过返回元组或其他可迭代值从函数返回多个值。例如，以下函数返回两个值：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">           </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">b</span>
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="go">foo (generic function with 1 method)</span>
+</code></pre></div>
+<p>如果你在交互式会话中调用它且不把返回值赋值给任何变量，你会看到返回的元组：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="go">(5, 6)</span>
+</code></pre></div>
+<p>解构赋值将每个值提取到一个变量中：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="go">(5, 6)</span>
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a>
+<a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="go">5</span>
+<a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a>
+<a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="go">6</span>
+</code></pre></div>
+<p>另一个常见用途是交换变量：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="go">(5, 6)</span>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a>
+<a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="go">6</span>
+<a href="#__codelineno-24-6" id="__codelineno-24-6" name="__codelineno-24-6"></a>
+<a href="#__codelineno-24-7" id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">y</span>
+<a href="#__codelineno-24-8" id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="go">5</span>
+</code></pre></div></p>
+<p>如果只需要迭代器元素的一个子集，一个常见的惯例是将忽略的元素分配给一个只包含下划线 <code class="highlight">_</code> 的变量（这是一个无效的变量名，请参阅 [合法的变量名]（<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/ref" title="GitHub User: ref">@ref</a> man -allowed-variable-names)):</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="go">1:10</span>
+<a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a>
+<a href="#__codelineno-25-4" id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">d</span>
+<a href="#__codelineno-25-5" id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="go">4</span>
+</code></pre></div>
+<p>其他有效的左侧表达式可以用作赋值列表的元素，它们将调用 <a href="@ref"><code class="highlight">setindex!</code></a> 或 <a href="@ref"><code class="highlight">setproperty!</code></a>，或者递归地解构迭代器的各个元素：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<a href="#__codelineno-26-2" id="__codelineno-26-2" name="__codelineno-26-2"></a>
+<a href="#__codelineno-26-3" id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
+<a href="#__codelineno-26-4" id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="go">(1, (2, 3))</span>
+<a href="#__codelineno-26-5" id="__codelineno-26-5" name="__codelineno-26-5"></a>
+<a href="#__codelineno-26-6" id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span>
+<a href="#__codelineno-26-7" id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="go">3-element Vector{Float64}:</span>
+<a href="#__codelineno-26-8" id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="go"> 1.0</span>
+<a href="#__codelineno-26-9" id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="go"> 0.0</span>
+<a href="#__codelineno-26-10" id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="go"> 0.0</span>
+<a href="#__codelineno-26-11" id="__codelineno-26-11" name="__codelineno-26-11"></a>
+<a href="#__codelineno-26-12" id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span>
+<a href="#__codelineno-26-13" id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="go">2</span>
+<a href="#__codelineno-26-14" id="__codelineno-26-14" name="__codelineno-26-14"></a>
+<a href="#__codelineno-26-15" id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span>
+<a href="#__codelineno-26-16" id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="go">3</span>
+</code></pre></div>
+<div class="admonition compat">
+<p class="admonition-title">Julia 1.6</p>
+<p>带 <code class="highlight">...</code> 的赋值需要 Julia 1.6</p>
+</div>
+<p>如果赋值列表中的最后一个符号后缀为 <code class="highlight">...</code>（称为 <em>slurping</em>），那么它将被分配给右侧迭代器剩余元素的集合或其惰性迭代器：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">...</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hello"</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="go">"hello"</span>
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span>
+<a href="#__codelineno-27-5" id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="go">'h': ASCII/Unicode U+0068 (category Ll: Letter, lowercase)</span>
+<a href="#__codelineno-27-6" id="__codelineno-27-6" name="__codelineno-27-6"></a>
+<a href="#__codelineno-27-7" id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span>
+<a href="#__codelineno-27-8" id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="go">"ello"</span>
+<a href="#__codelineno-27-9" id="__codelineno-27-9" name="__codelineno-27-9"></a>
+<a href="#__codelineno-27-10" id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">...</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Iterators</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">)</span>
+<a href="#__codelineno-27-11" id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="go">Base.Generator{UnitRange{Int64}, typeof(abs2)}(abs2, 1:4)</span>
+<a href="#__codelineno-27-12" id="__codelineno-27-12" name="__codelineno-27-12"></a>
+<a href="#__codelineno-27-13" id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span>
+<a href="#__codelineno-27-14" id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="go">1</span>
+<a href="#__codelineno-27-15" id="__codelineno-27-15" name="__codelineno-27-15"></a>
+<a href="#__codelineno-27-16" id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">b</span>
+<a href="#__codelineno-27-17" id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="go">Base.Iterators.Rest{Base.Generator{UnitRange{Int64}, typeof(abs2)}, Int64}(Base.Generator{UnitRange{Int64}, typeof(abs2)}(abs2, 1:4), 1)</span>
+</code></pre></div>
+<p>有关特定迭代器的精确处理和自定义的详细信息，请参阅 <a href="@ref"><code class="highlight">Base.rest</code></a>。</p>
+<h2 id="_11">参数解构<a class="headerlink" href="#_11" title="Permanent link">¶</a></h2>
+<p>析构特性也可以被用在函数参数中。
+如果一个函数的参数被写成了元组形式 (如  <code class="highlight">(x, y)</code>) 而不是简单的符号，那么一个赋值运算 <code class="highlight">(x, y) = argument</code> 将会被默认插入：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">minmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a>
+<a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gap</span><span class="p">((</span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">min</span>
+<a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a>
+<a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gap</span><span class="p">(</span><span class="n">minmax</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<a href="#__codelineno-28-6" id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="mi">8</span>
+</code></pre></div>
+<p>注意在定义函数 <code class="highlight">gap</code> 时额外的括号。 没有它们，<code class="highlight">gap</code> 函数将会是一个双参数函数，这个例子也会无法正常运行。</p>
+<p>对于匿名函数，解构单个元组需要一个额外的逗号：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">(((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)])</span>
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="go">2-element Array{Int64,1}:</span>
+<a href="#__codelineno-29-3" id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="go"> 3</span>
+<a href="#__codelineno-29-4" id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="go"> 7</span>
+</code></pre></div>
+<h2 id="_12">变参函数<a class="headerlink" href="#_12" title="Permanent link">¶</a></h2>
+<p>定义有任意个参数的函数会带来很多便利。这类函数通常被称为“变参”函数，即“参数数量可变”的简称。你可以通过在最后一个参数后增加省略号来定义一个变参函数:</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-30-2" id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="go">bar (generic function with 1 method)</span>
+</code></pre></div>
+<p>变量 <code class="highlight">a</code> 和 <code class="highlight">b</code> 和以前一样被绑定给前两个参数，后面的参数整个做为迭代集合被绑定到变量 <code class="highlight">x</code> 上 :</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-31-1" id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<a href="#__codelineno-31-2" id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="go">(1, 2, ())</span>
+<a href="#__codelineno-31-3" id="__codelineno-31-3" name="__codelineno-31-3"></a>
+<a href="#__codelineno-31-4" id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<a href="#__codelineno-31-5" id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="go">(1, 2, (3,))</span>
+<a href="#__codelineno-31-6" id="__codelineno-31-6" name="__codelineno-31-6"></a>
+<a href="#__codelineno-31-7" id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<a href="#__codelineno-31-8" id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="go">(1, 2, (3, 4))</span>
+<a href="#__codelineno-31-9" id="__codelineno-31-9" name="__codelineno-31-9"></a>
+<a href="#__codelineno-31-10" id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<a href="#__codelineno-31-11" id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="go">(1, 2, (3, 4, 5, 6))</span>
+</code></pre></div>
+<p>在所有这些情况下，<code class="highlight">x</code> 被绑定到传递给 <code class="highlight">bar</code> 的尾随值的元组。</p>
+<p>也可以限制可以传递给函数的参数的数量，这部分内容稍后在  <a href="@ref">参数化约束的可变参数方法</a>  中讨论。</p>
+<p>另一方面，将可迭代集中包含的值拆解为单独的参数进行函数调用通常很方便。 要实现这一点，需要在函数调用中额外使用 <code class="highlight">...</code> 而不仅仅只是变量：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-32-1" id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<a href="#__codelineno-32-2" id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="go">(3, 4)</span>
+<a href="#__codelineno-32-3" id="__codelineno-32-3" name="__codelineno-32-3"></a>
+<a href="#__codelineno-32-4" id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">x</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-32-5" id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="go">(1, 2, (3, 4))</span>
+</code></pre></div>
+<p>在这个情况下一组值会被精确切片成一个可变参数调用，这里参数的数量是可变的。但是并不需要成为这种情况：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-33-1" id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<a href="#__codelineno-33-2" id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="go">(2, 3, 4)</span>
+<a href="#__codelineno-33-3" id="__codelineno-33-3" name="__codelineno-33-3"></a>
+<a href="#__codelineno-33-4" id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-33-5" id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="go">(1, 2, (3, 4))</span>
+<a href="#__codelineno-33-6" id="__codelineno-33-6" name="__codelineno-33-6"></a>
+<a href="#__codelineno-33-7" id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<a href="#__codelineno-33-8" id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="go">(1, 2, 3, 4)</span>
+<a href="#__codelineno-33-9" id="__codelineno-33-9" name="__codelineno-33-9"></a>
+<a href="#__codelineno-33-10" id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-33-11" id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="go">(1, 2, (3, 4))</span>
+</code></pre></div>
+<p>进一步，拆解给函数调用中的可迭代对象不需要是个元组：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-34-1" id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<a href="#__codelineno-34-2" id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="go">2-element Vector{Int64}:</span>
+<a href="#__codelineno-34-3" id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="go"> 3</span>
+<a href="#__codelineno-34-4" id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="go"> 4</span>
+<a href="#__codelineno-34-5" id="__codelineno-34-5" name="__codelineno-34-5"></a>
+<a href="#__codelineno-34-6" id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">x</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-34-7" id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="go">(1, 2, (3, 4))</span>
+<a href="#__codelineno-34-8" id="__codelineno-34-8" name="__codelineno-34-8"></a>
+<a href="#__codelineno-34-9" id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<a href="#__codelineno-34-10" id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="go">4-element Vector{Int64}:</span>
+<a href="#__codelineno-34-11" id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="go"> 1</span>
+<a href="#__codelineno-34-12" id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="go"> 2</span>
+<a href="#__codelineno-34-13" id="__codelineno-34-13" name="__codelineno-34-13"></a><span class="go"> 3</span>
+<a href="#__codelineno-34-14" id="__codelineno-34-14" name="__codelineno-34-14"></a><span class="go"> 4</span>
+<a href="#__codelineno-34-15" id="__codelineno-34-15" name="__codelineno-34-15"></a>
+<a href="#__codelineno-34-16" id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-34-17" id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="go">(1, 2, (3, 4))</span>
+</code></pre></div>
+<p>此外，参数被放入的函数不一定是可变参数函数（尽管经常是）：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-35-1" id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">baz</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a href="#__codelineno-35-2" id="__codelineno-35-2" name="__codelineno-35-2"></a>
+<a href="#__codelineno-35-3" id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<a href="#__codelineno-35-4" id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="go">2-element Vector{Int64}:</span>
+<a href="#__codelineno-35-5" id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="go"> 1</span>
+<a href="#__codelineno-35-6" id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="go"> 2</span>
+<a href="#__codelineno-35-7" id="__codelineno-35-7" name="__codelineno-35-7"></a>
+<a href="#__codelineno-35-8" id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">baz</span><span class="p">(</span><span class="n">args</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-35-9" id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="go">3</span>
+<a href="#__codelineno-35-10" id="__codelineno-35-10" name="__codelineno-35-10"></a>
+<a href="#__codelineno-35-11" id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<a href="#__codelineno-35-12" id="__codelineno-35-12" name="__codelineno-35-12"></a><span class="go">3-element Vector{Int64}:</span>
+<a href="#__codelineno-35-13" id="__codelineno-35-13" name="__codelineno-35-13"></a><span class="go"> 1</span>
+<a href="#__codelineno-35-14" id="__codelineno-35-14" name="__codelineno-35-14"></a><span class="go"> 2</span>
+<a href="#__codelineno-35-15" id="__codelineno-35-15" name="__codelineno-35-15"></a><span class="go"> 3</span>
+<a href="#__codelineno-35-16" id="__codelineno-35-16" name="__codelineno-35-16"></a>
+<a href="#__codelineno-35-17" id="__codelineno-35-17" name="__codelineno-35-17"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">baz</span><span class="p">(</span><span class="n">args</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-35-18" id="__codelineno-35-18" name="__codelineno-35-18"></a><span class="gr">ERROR: MethodError: no method matching baz(::Int64, ::Int64, ::Int64)</span>
+<a href="#__codelineno-35-19" id="__codelineno-35-19" name="__codelineno-35-19"></a><span class="gr">Closest candidates are:</span>
+<a href="#__codelineno-35-20" id="__codelineno-35-20" name="__codelineno-35-20"></a><span class="gr">  baz(::Any, ::Any) at none:1</span>
+</code></pre></div>
+<p>正如你所见，如果要拆解的容器（比如元组或数组）元素数量不匹配就会报错，和直接给多个参数报错一样。</p>
+<h2 id="_13">可选参数<a class="headerlink" href="#_13" title="Permanent link">¶</a></h2>
+<p>在很多情况下，函数参数有合理的默认值，因此也许不需要显式地传递。例如，<code class="highlight">Dates</code> 模块中的 <a href="@ref"><code class="highlight">Date(y, [m, d])</code></a> 函数对于给定的年（year）<code class="highlight">y</code>、月（mouth）<code class="highlight">m</code>、日（data）<code class="highlight">d</code> 构造了 <code class="highlight">Date</code> 类型。但是，<code class="highlight">m</code> 和 <code class="highlight">d</code> 参数都是可选的，默认值都是 <code class="highlight"><span class="mf">1</span></code>。这行为可以简述为：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-36-1" id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="k">function</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">y</span><span class="o">::</span><span class="kt">Int64</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="o">::</span><span class="kt">Int64</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="o">::</span><span class="kt">Int64</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-36-2" id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validargs</span><span class="p">(</span><span class="n">Date</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+<a href="#__codelineno-36-3" id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">throw</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<a href="#__codelineno-36-4" id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">UTD</span><span class="p">(</span><span class="n">totaldays</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)))</span>
+<a href="#__codelineno-36-5" id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="k">end</span>
+</code></pre></div>
+<p>注意，这个定义调用了 <code class="highlight">Date</code> 函数的另一个方法，该方法带有一个 <code class="highlight">UTInstant{Day}</code> 类型的参数。</p>
+<p>通过此定义，函数调用时可以带有一个、两个或三个参数，并且在只有一个或两个参数被指定时后，自动传递 <code class="highlight"><span class="mf">1</span></code> 为未指定参数值：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-37-1" id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Dates</span>
+<a href="#__codelineno-37-2" id="__codelineno-37-2" name="__codelineno-37-2"></a>
+<a href="#__codelineno-37-3" id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span>
+<a href="#__codelineno-37-4" id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="go">2000-12-12</span>
+<a href="#__codelineno-37-5" id="__codelineno-37-5" name="__codelineno-37-5"></a>
+<a href="#__codelineno-37-6" id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span>
+<a href="#__codelineno-37-7" id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="go">2000-12-01</span>
+<a href="#__codelineno-37-8" id="__codelineno-37-8" name="__codelineno-37-8"></a>
+<a href="#__codelineno-37-9" id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<a href="#__codelineno-37-10" id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="go">2000-01-01</span>
+</code></pre></div>
+<p>可选参数实际上只是一种方便的语法，用于编写多种具有不同数量参数的方法定义（请参阅 <a href="@ref">可选参数和关键字的参数的注意事项</a>）。这可通过调用 <code class="highlight">methods</code> 函数来检查我们的 <code class="highlight">Date</code> 函数示例。</p>
+<h2 id="_14">关键字参数<a class="headerlink" href="#_14" title="Permanent link">¶</a></h2>
+<p>某些函数需要大量参数，或者具有大量行为。记住如何调用这样的函数可能很困难。关键字参数允许通过名称而不是仅通过位置来识别参数，使得这些复杂接口易于使用和扩展。</p>
+<p>例如，考虑绘制一条线的函数 <code class="highlight">plot</code>。这个函数可能有很多选项，用来控制线条的样式、宽度、颜色等。如果它接受关键字参数，一个可行的调用可能看起来像 <code class="highlight">plot(x, y, width=2)</code>，这里我们仅指定线的宽度。请注意，这样做有两个目的。调用更可读，因为我们能以其意义标记参数。也使得大量参数的任意子集都能以任意次序传递。</p>
+<p>具有关键字参数的函数在签名中使用分号定义：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-38-1" id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="k">function</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">style</span><span class="o">=</span><span class="s">"solid"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">"black"</span><span class="p">)</span>
+<a href="#__codelineno-38-2" id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="c">###</span>
+<a href="#__codelineno-38-3" id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="k">end</span>
+</code></pre></div>
+<p>在函数调用时，分号是可选的：可以调用 <code class="highlight">plot(x, y, width=2)</code> 或 <code class="highlight">plot(x, y; width=2)</code>，但前者的风格更为常见。显式的分号只有在传递可变参数或下文中描述的需计算的关键字时是必要的。</p>
+<p>关键字参数的默认值只在必需时求值（当相应的关键字参数没有被传入），并且按从左到右的顺序求值，因为默认值的表达式可能会参照先前的关键字参数。</p>
+<p>关键字参数的类型可以通过如下的方式显式指定：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-39-1" id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(;</span><span class="n">x</span><span class="o">::</span><span class="kt">Int</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-39-2" id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="c">###</span>
+<a href="#__codelineno-39-3" id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="k">end</span>
+</code></pre></div>
+<p>关键字参数也可以在变参函数中使用：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-40-1" id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="k">function</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">...</span><span class="p">;</span><span class="w"> </span><span class="n">style</span><span class="o">=</span><span class="s">"solid"</span><span class="p">)</span>
+<a href="#__codelineno-40-2" id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="w">    </span><span class="c">###</span>
+<a href="#__codelineno-40-3" id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="k">end</span>
+</code></pre></div>
+<p>附加的关键字参数可用 <code class="highlight">...</code> 收集，正如在变参函数中：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-41-1" id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-41-2" id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="w">    </span><span class="c">###</span>
+<a href="#__codelineno-41-3" id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="k">end</span>
+</code></pre></div>
+<p>在 <code class="highlight">f</code> 中，<code class="highlight">kwargs</code> 将是一个在命名元组上的不可变键值迭代器。 具名元组（以及带有<code class="highlight">Symbol</code>键的字典）可以在调用中使用分号作为关键字参数传递，例如 <code class="highlight">f(x, z=1; kwargs...)</code>。</p>
+<p>如果一个关键字参数在方法定义中未指定默认值，那么它就是*必需的*：如果调用者没有为其赋值，那么将会抛出一个 <a href="@ref"><code class="highlight">UndefKeywordError</code></a> 异常：
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-42-1" id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-42-2" id="__codelineno-42-2" name="__codelineno-42-2"></a><span class="w">    </span><span class="c">###</span>
+<a href="#__codelineno-42-3" id="__codelineno-42-3" name="__codelineno-42-3"></a><span class="k">end</span>
+<a href="#__codelineno-42-4" id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c"># ok, y is assigned</span>
+<a href="#__codelineno-42-5" id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w">      </span><span class="c"># throws UndefKeywordError(:y)</span>
+</code></pre></div></p>
+<p>在分号后也可传递 <code class="highlight">key =&gt; value</code> 表达式。例如，<code class="highlight">plot(x, y; :width =&gt; 2)</code> 等价于 <code class="highlight">plot(x, y, width=2)</code>。当关键字名称需要在运行时被计算时，这就很实用了。</p>
+<p>当分号后出现裸标识符或点表达式时，标识符或字段名称隐含关键字参数名称。 例如<code class="highlight">plot(x, y; width)</code> 等价于<code class="highlight">plot(x, y; width=width)</code>，<code class="highlight">plot(x, y; options.width)</code> 等价于<code class="highlight">plot(x, y; width=options.width)</code>。</p>
+<p>可选参数的性质使得可以多次指定同一参数的值。例如，在调用 <code class="highlight">plot(x, y; options..., width=2)</code> 的过程中，<code class="highlight">options</code> 结构也能包含一个 <code class="highlight">width</code> 的值。在这种情况下，最右边的值优先级最高；在此例中，<code class="highlight">width</code> 的值可以确定是 <code class="highlight"><span class="mf">2</span></code>。但是，显式地多次指定同一参数的值是不允许的，例如 <code class="highlight">plot(x, y, width=2, width=3)</code>，这会导致语法错误。</p>
+<h2 id="_15">默认值作用域的计算<a class="headerlink" href="#_15" title="Permanent link">¶</a></h2>
+<p>当计算可选和关键字参数的默认值表达式时，只有*先前*的参数才在作用域内。例如，给出以下定义：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-43-1" id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-43-2" id="__codelineno-43-2" name="__codelineno-43-2"></a><span class="w">    </span><span class="c">###</span>
+<a href="#__codelineno-43-3" id="__codelineno-43-3" name="__codelineno-43-3"></a><span class="k">end</span>
+</code></pre></div>
+<p><code class="highlight">a=b</code> 中的 <code class="highlight">b</code> 指的是外部作用域内的 <code class="highlight">b</code>，而不是后续参数中的 <code class="highlight">b</code>。</p>
+<h2 id="do"><a href="@id Do-Block-Syntax-for-Function-Arguments">函数参数中的 Do 结构</a><a class="headerlink" href="#do" title="Permanent link">¶</a></h2>
+<p>把函数作为参数传递给其他函数是一种强大的技术，但它的语法并不总是很方便。当函数参数占据多行时，这样的调用便特别难以编写。例如，考虑在具有多种情况的函数上调用 <a href="@ref"><code class="highlight">map</code></a>：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-44-1" id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="n">map</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="k">begin</span>
+<a href="#__codelineno-44-2" id="__codelineno-44-2" name="__codelineno-44-2"></a><span class="w">           </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">iseven</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-44-3" id="__codelineno-44-3" name="__codelineno-44-3"></a><span class="w">               </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-44-4" id="__codelineno-44-4" name="__codelineno-44-4"></a><span class="w">           </span><span class="k">elseif</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-44-5" id="__codelineno-44-5" name="__codelineno-44-5"></a><span class="w">               </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-44-6" id="__codelineno-44-6" name="__codelineno-44-6"></a><span class="w">           </span><span class="k">else</span>
+<a href="#__codelineno-44-7" id="__codelineno-44-7" name="__codelineno-44-7"></a><span class="w">               </span><span class="k">return</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-44-8" id="__codelineno-44-8" name="__codelineno-44-8"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-44-9" id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="w">       </span><span class="k">end</span><span class="p">,</span>
+<a href="#__codelineno-44-10" id="__codelineno-44-10" name="__codelineno-44-10"></a><span class="w">    </span><span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">])</span>
+</code></pre></div>
+<p>Julia 提供了一个保留字 <code class="highlight"><span class="k">do</span></code>，用于更清楚地重写此代码：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-45-1" id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">map</span><span class="p">([</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">])</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-45-2" id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">iseven</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-45-3" id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-45-4" id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-45-5" id="__codelineno-45-5" name="__codelineno-45-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-45-6" id="__codelineno-45-6" name="__codelineno-45-6"></a><span class="w">    </span><span class="k">else</span>
+<a href="#__codelineno-45-7" id="__codelineno-45-7" name="__codelineno-45-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-45-8" id="__codelineno-45-8" name="__codelineno-45-8"></a><span class="w">    </span><span class="k">end</span>
+<a href="#__codelineno-45-9" id="__codelineno-45-9" name="__codelineno-45-9"></a><span class="k">end</span>
+</code></pre></div>
+<p><code class="highlight"><span class="k">do</span><span class="w"> </span><span class="nv">x</span></code> 语法创建一个带有参数 <code class="highlight">x</code> 的匿名函数，并将其作为第一个参数传递给 <a href="@ref"><code class="highlight">map</code></a>。 类似地，<code class="highlight"><span class="k">do</span><span class="w"> </span><span class="nv">a</span>,<span class="nv">b</span></code> 将创建一个有两个参数的匿名函数。 请注意，<code class="highlight"><span class="k">do</span><span class="w"> </span><span class="ss">(</span><span class="nv">a</span>,<span class="nv">b</span><span class="ss">)</span></code> 将创建一个单参数匿名函数，其参数是一个要解构的元组。 一个简单的 <code class="highlight"><span class="k">do</span></code> 会声明接下来是一个形式为 <code class="highlight"><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">...</span></code> 的匿名函数。</p>
+<p>这些参数如何初始化取决于「外部」函数；在这里，<a href="@ref"><code class="highlight">map</code></a> 将会依次将 <code class="highlight">x</code> 设置为 <code class="highlight">A</code>、<code class="highlight">B</code>、<code class="highlight">C</code>，再分别调用调用匿名函数，正如在 <code class="highlight">map(func, [A, B, C])</code> 语法中所发生的。</p>
+<p>这种语法使得更容易使用函数来有效地扩展语言，因为调用看起来就像普通代码块。有许多可能的用法与 <a href="@ref"><code class="highlight">map</code></a> 完全不同，比如管理系统状态。例如，有一个版本的 <a href="@ref"><code class="highlight">open</code></a> 可以通过运行代码来确保已经打开的文件最终会被关闭：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-46-1" id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="n">open</span><span class="p">(</span><span class="s">"outfile"</span><span class="p">,</span><span class="w"> </span><span class="s">"w"</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">io</span>
+<a href="#__codelineno-46-2" id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<a href="#__codelineno-46-3" id="__codelineno-46-3" name="__codelineno-46-3"></a><span class="k">end</span>
+</code></pre></div>
+<p>这是通过以下定义实现的：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-47-1" id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="k">function</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-47-2" id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="w">    </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">args</span><span class="o">...</span><span class="p">)</span>
+<a href="#__codelineno-47-3" id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="w">    </span><span class="k">try</span>
+<a href="#__codelineno-47-4" id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">        </span><span class="n">f</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<a href="#__codelineno-47-5" id="__codelineno-47-5" name="__codelineno-47-5"></a><span class="w">    </span><span class="k">finally</span>
+<a href="#__codelineno-47-6" id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="w">        </span><span class="n">close</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<a href="#__codelineno-47-7" id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="w">    </span><span class="k">end</span>
+<a href="#__codelineno-47-8" id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="k">end</span>
+</code></pre></div>
+<p>在这里，<a href="@ref"><code class="highlight">open</code></a> 首先打开要写入的文件，接着将结果输出流传递给你在 <code class="highlight"><span class="k">do</span><span class="w"> </span>...<span class="w"> </span><span class="k">end</span></code> 代码快中定义的匿名函数。在你的函数退出后，<a href="@ref"><code class="highlight">open</code></a> 将确保流被正确关闭，无论你的函数是正常退出还是抛出了一个异常（<code class="highlight">try/finally</code> 结构会在 <a href="@ref">流程控制</a> 中描述）。</p>
+<p>使用 <code class="highlight"><span class="k">do</span></code> 代码块语法时，查阅文档或实现有助于了解用户函数的参数是如何初始化的。</p>
+<p>类似于其他的内部函数， <code class="highlight"><span class="k">do</span></code> 代码块也可以“捕获”上一个作用域的变量。例如，上一个 <code class="highlight"><span class="nv">open</span>...<span class="k">do</span></code> 的例子中变量 <code class="highlight">data</code> 是从外部作用域捕获的。捕获变量可能会给性能优化带来挑战，详见 <a href="@ref man-performance-captured">性能建议</a>。</p>
+<h2 id="_16">函数的复合与链式调用<a class="headerlink" href="#_16" title="Permanent link">¶</a></h2>
+<p>Julia中的多个函数可以用函数复合或管道连接（链式调用）组合起来。</p>
+<p>函数的复合指的是把多个函数绑定到一起，然后作用于最先调用那个函数的参数。
+你可以使用函数复合运算符 (<code class="highlight">∘</code>) 来组合函数，这样一来 <code class="highlight">(f ∘ g)(args...)</code> 就等价于 <code class="highlight">f(g(args...))</code>.</p>
+<p>你可以在REPL和合理配置的编辑器中用 <code class="highlight">\circ&lt;tab&gt;</code> 输入函数复合运算符。</p>
+<p>例如， <code class="highlight">sqrt</code> 和 <code class="highlight">+</code> 可以用下面这种方式组合：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-48-1" id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">sqrt</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="o">+</span><span class="p">)(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<a href="#__codelineno-48-2" id="__codelineno-48-2" name="__codelineno-48-2"></a><span class="go">3.0</span>
+</code></pre></div>
+<p>这个语句先把数字相加，再对结果求平方根。</p>
+<p>下一个例子组合了三个函数并把新函数作用到一个字符串组成的数组上：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-49-1" id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">first</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">reverse</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">uppercase</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="s">"you can compose functions like this"</span><span class="p">))</span>
+<a href="#__codelineno-49-2" id="__codelineno-49-2" name="__codelineno-49-2"></a><span class="go">6-element Vector{Char}:</span>
+<a href="#__codelineno-49-3" id="__codelineno-49-3" name="__codelineno-49-3"></a><span class="go"> 'U': ASCII/Unicode U+0055 (category Lu: Letter, uppercase)</span>
+<a href="#__codelineno-49-4" id="__codelineno-49-4" name="__codelineno-49-4"></a><span class="go"> 'N': ASCII/Unicode U+004E (category Lu: Letter, uppercase)</span>
+<a href="#__codelineno-49-5" id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="go"> 'E': ASCII/Unicode U+0045 (category Lu: Letter, uppercase)</span>
+<a href="#__codelineno-49-6" id="__codelineno-49-6" name="__codelineno-49-6"></a><span class="go"> 'S': ASCII/Unicode U+0053 (category Lu: Letter, uppercase)</span>
+<a href="#__codelineno-49-7" id="__codelineno-49-7" name="__codelineno-49-7"></a><span class="go"> 'E': ASCII/Unicode U+0045 (category Lu: Letter, uppercase)</span>
+<a href="#__codelineno-49-8" id="__codelineno-49-8" name="__codelineno-49-8"></a><span class="go"> 'S': ASCII/Unicode U+0053 (category Lu: Letter, uppercase)</span>
+</code></pre></div>
+<p>函数的链式调用（有时也称“使用管道”把数据送到一系列函数中去）指的是把一个函数作用到前一个函数的输出上：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-50-1" id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">sqrt</span>
+<a href="#__codelineno-50-2" id="__codelineno-50-2" name="__codelineno-50-2"></a><span class="go">7.416198487095663</span>
+</code></pre></div>
+<p>在这里， <code class="highlight">sum</code> 函数求出的和被传递到 <code class="highlight">sqrt</code> 函数作为参数。等价的函数复合写法是：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-51-1" id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">sqrt</span><span class="w"> </span><span class="o">∘</span><span class="w"> </span><span class="n">sum</span><span class="p">)(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+<a href="#__codelineno-51-2" id="__codelineno-51-2" name="__codelineno-51-2"></a><span class="go">7.416198487095663</span>
+</code></pre></div>
+<p>管道运算符还可以和广播一起使用（<code class="highlight"><span class="o">.|&gt;</span></code>），这提供了一个有用的链式调用/管道+向量化运算的组合语法（接下来将描述）。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-52-1" id="__codelineno-52-1" name="__codelineno-52-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">[</span><span class="s">"a"</span><span class="p">,</span><span class="w"> </span><span class="s">"list"</span><span class="p">,</span><span class="w"> </span><span class="s">"of"</span><span class="p">,</span><span class="w"> </span><span class="s">"strings"</span><span class="p">]</span><span class="w"> </span><span class="o">.|&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">uppercase</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">,</span><span class="w"> </span><span class="n">titlecase</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">]</span>
+<a href="#__codelineno-52-2" id="__codelineno-52-2" name="__codelineno-52-2"></a><span class="go">4-element Vector{Any}:</span>
+<a href="#__codelineno-52-3" id="__codelineno-52-3" name="__codelineno-52-3"></a><span class="go">  "A"</span>
+<a href="#__codelineno-52-4" id="__codelineno-52-4" name="__codelineno-52-4"></a><span class="go">  "tsil"</span>
+<a href="#__codelineno-52-5" id="__codelineno-52-5" name="__codelineno-52-5"></a><span class="go">  "Of"</span>
+<a href="#__codelineno-52-6" id="__codelineno-52-6" name="__codelineno-52-6"></a><span class="go"> 7</span>
+</code></pre></div>
+<h2 id="_17"><a href="@id man-vectorized">向量化函数的点语法</a><a class="headerlink" href="#_17" title="Permanent link">¶</a></h2>
+<p>在科学计算语言中，通常会有函数的「向量化」版本，它简单地将给定函数 <code class="highlight">f(x)</code> 作用于数组 <code class="highlight">A</code> 的每个元素，接着通过 <code class="highlight">f(A)</code> 生成一个新数组。这种语法便于数据处理，但在其它语言中，向量化通常也是性能所需要的：如果循环很慢，函数的「向量化」版本可以调用由低级语言编写的、快速的库代码。在 Julia 中，向量化函数*不*是性能所必需的，实际上编写自己的循环通常也是有益的（请参阅 <a href="@ref man-performance-tips">Performance Tips</a>），但它们仍然很方便。因此，<em>任何</em> Julia 函数 <code class="highlight">f</code> 能够以元素方式作用于任何数组（或者其它集合），这通过语法 <code class="highlight">f.(A)</code> 实现。例如，<code class="highlight">sin</code> 可以作用于向量 <code class="highlight">A</code> 中的所有元素，如下所示：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-53-1" id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">]</span>
+<a href="#__codelineno-53-2" id="__codelineno-53-2" name="__codelineno-53-2"></a><span class="go">3-element Vector{Float64}:</span>
+<a href="#__codelineno-53-3" id="__codelineno-53-3" name="__codelineno-53-3"></a><span class="go"> 1.0</span>
+<a href="#__codelineno-53-4" id="__codelineno-53-4" name="__codelineno-53-4"></a><span class="go"> 2.0</span>
+<a href="#__codelineno-53-5" id="__codelineno-53-5" name="__codelineno-53-5"></a><span class="go"> 3.0</span>
+<a href="#__codelineno-53-6" id="__codelineno-53-6" name="__codelineno-53-6"></a>
+<a href="#__codelineno-53-7" id="__codelineno-53-7" name="__codelineno-53-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<a href="#__codelineno-53-8" id="__codelineno-53-8" name="__codelineno-53-8"></a><span class="go">3-element Vector{Float64}:</span>
+<a href="#__codelineno-53-9" id="__codelineno-53-9" name="__codelineno-53-9"></a><span class="go"> 0.8414709848078965</span>
+<a href="#__codelineno-53-10" id="__codelineno-53-10" name="__codelineno-53-10"></a><span class="go"> 0.9092974268256817</span>
+<a href="#__codelineno-53-11" id="__codelineno-53-11" name="__codelineno-53-11"></a><span class="go"> 0.1411200080598672</span>
+</code></pre></div>
+<p>当然，你如果为 <code class="highlight">f</code> 编写了一个专门的「向量化」方法，例如通过 <code class="highlight">f(A::AbstractArray) = map(f, A)</code>，可以省略点号，这和 <code class="highlight">f.(A)</code> 一样高效。但这种方法要求你事先决定要进行向量化的函数。</p>
+<p>更一般地，<code class="highlight">f.(args...)</code> 实际上等价于 <code class="highlight">broadcast(f, args...)</code>，它允许你操作多个数组（甚至是不同形状的），或是数组和标量的混合（请参阅 <a href="@ref">Broadcasting</a>）。例如，如果有 <code class="highlight">f(x,y) = 3x + 4y</code>，那么 <code class="highlight">f.(pi,A)</code> 将为 <code class="highlight">A</code> 中的每个 <code class="highlight">a</code> 返回一个由 <code class="highlight">f(pi,a)</code> 组成的新数组，而 <code class="highlight">f.(vector1,vector2)</code> 将为每个索引 <code class="highlight">i</code> 返回一个由 <code class="highlight"><span class="n">f</span><span class="p">(</span><span class="n">vector1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span><span class="n">vector2</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span></code> 组成的新向量（如果向量具有不同的长度则会抛出异常）。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-54-1" id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="n">y</span><span class="p">;</span>
+<a href="#__codelineno-54-2" id="__codelineno-54-2" name="__codelineno-54-2"></a>
+<a href="#__codelineno-54-3" id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">];</span>
+<a href="#__codelineno-54-4" id="__codelineno-54-4" name="__codelineno-54-4"></a>
+<a href="#__codelineno-54-5" id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">4.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0</span><span class="p">];</span>
+<a href="#__codelineno-54-6" id="__codelineno-54-6" name="__codelineno-54-6"></a>
+<a href="#__codelineno-54-7" id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">)</span>
+<a href="#__codelineno-54-8" id="__codelineno-54-8" name="__codelineno-54-8"></a><span class="go">3-element Vector{Float64}:</span>
+<a href="#__codelineno-54-9" id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="go"> 13.42477796076938</span>
+<a href="#__codelineno-54-10" id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="go"> 17.42477796076938</span>
+<a href="#__codelineno-54-11" id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="go"> 21.42477796076938</span>
+<a href="#__codelineno-54-12" id="__codelineno-54-12" name="__codelineno-54-12"></a>
+<a href="#__codelineno-54-13" id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
+<a href="#__codelineno-54-14" id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="go">3-element Vector{Float64}:</span>
+<a href="#__codelineno-54-15" id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="go"> 19.0</span>
+<a href="#__codelineno-54-16" id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="go"> 26.0</span>
+<a href="#__codelineno-54-17" id="__codelineno-54-17" name="__codelineno-54-17"></a><span class="go"> 33.0</span>
+</code></pre></div>
+<p>此外，<em>嵌套的</em> <code class="highlight">f.(args...)</code> 调用会被*融合*到一个 <code class="highlight">broadcast</code> 循环中。例如，<code class="highlight">sin.(cos.(X))</code> 等价于 <code class="highlight"><span class="n">broadcast</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="w"> </span><span class="n">X</span><span class="p">)</span></code>，类似于 <code class="highlight">[<span class="nv">sin</span><span class="ss">(</span><span class="nv">cos</span><span class="ss">(</span><span class="nv">x</span><span class="ss">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">X</span>]</code>：在 <code class="highlight">X</code> 上只有一个循环，并且只为结果分配了一个数组。[ 相反，在典型的「向量化」语言中，<code class="highlight">sin(cos(X))</code> 首先会为 <code class="highlight">tmp=cos(X)</code> 分配第一个临时数组，然后在单独的循环中计算 <code class="highlight">sin(tmp)</code>，再分配第二个数组。] 这种循环融合不是可能发生也可能不发生的编译器优化，只要遇到了嵌套的 <code class="highlight">f.(args...)</code> 调用，它就是一个*语法保证*。技术上，一旦遇到「非点」函数调用，融合就会停止；例如，在 <code class="highlight">sin.(sort(cos.(X)))</code> 中，由于插入的 <code class="highlight">sort</code> 函数，<code class="highlight">sin</code> 和 <code class="highlight">cos</code> 无法被合并。</p>
+<p>最后，最大效率通常在向量化操作的输出数组被*预分配*时实现，这样重复调用就不会一次又一次地为结果分配新数组（请参阅 <a href="@ref">输出预分配</a>）。一个方便的语法是 <code class="highlight">X .= ...</code>，它等价于 <code class="highlight">broadcast!(identity, X, ...)</code>，除了上面提到的，<code class="highlight">broadcast!</code> 循环可与任何嵌套的「点」调用融合。例如，<code class="highlight">X .= sin.(Y)</code> 等价于 <code class="highlight">broadcast!(sin, X, Y)</code>，用 <code class="highlight">sin.(Y)</code> in-place 覆盖 <code class="highlight">X</code>。如果左边是数组索引表达式，例如 <code class="highlight"><span class="nv">X</span>[<span class="mi">2</span>:<span class="k">end</span>]<span class="w"> </span>.<span class="o">=</span><span class="w"> </span><span class="nv">sin</span>.<span class="ss">(</span><span class="nv">Y</span><span class="ss">)</span></code>，那就将 <code class="highlight">broadcast!</code> 转换在一个 <code class="highlight">view</code> 上，例如 <code class="highlight">broadcast!(sin, view(X, 2:lastindex(X)), Y)</code>，这样左侧就被 in-place 更新了。</p>
+<p>由于在表达式中为许多操作和函数调用添加点可能很乏味并导致难以阅读的代码，宏 <a href="@ref @__dot__"><code class="highlight">@.</code></a> 用于将表达式中的*每个*函数调用、操作和赋值转换为「点」版本。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-55-1" id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">];</span>
+<a href="#__codelineno-55-2" id="__codelineno-55-2" name="__codelineno-55-2"></a>
+<a href="#__codelineno-55-3" id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">Y</span><span class="p">);</span><span class="w"> </span><span class="c"># pre-allocate output array</span>
+<a href="#__codelineno-55-4" id="__codelineno-55-4" name="__codelineno-55-4"></a>
+<a href="#__codelineno-55-5" id="__codelineno-55-5" name="__codelineno-55-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="nd">@.</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="c"># equivalent to X .= sin.(cos.(Y))</span>
+<a href="#__codelineno-55-6" id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="go">4-element Vector{Float64}:</span>
+<a href="#__codelineno-55-7" id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="go">  0.5143952585235492</span>
+<a href="#__codelineno-55-8" id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="go"> -0.4042391538522658</span>
+<a href="#__codelineno-55-9" id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="go"> -0.8360218615377305</span>
+<a href="#__codelineno-55-10" id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="go"> -0.6080830096407656</span>
+</code></pre></div>
+<p>像 <code class="highlight">.+</code> 这样的二元（或一元）运算符使用相同的机制进行管理：它们等价于 <code class="highlight">broadcast</code> 调用且可与其它嵌套的「点」调用融合。<code class="highlight">X .+= Y</code> 等等价于 <code class="highlight">X .= X .+ Y</code>，结果为一个融合的 in-place 赋值；另见 <a href="@ref man-dot-operators">dot operators</a>。</p>
+<p>您也可以使用 <a href="@ref"><code class="highlight"><span class="o">|&gt;</span></code></a> 将点操作与函数链组合在一起，如本例所示：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-56-1" id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">;]</span><span class="w"> </span><span class="o">.|&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">inv</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">-&gt;</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="p">,</span><span class="w"> </span><span class="n">isodd</span><span class="p">]</span>
+<a href="#__codelineno-56-2" id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="go">5-element Vector{Real}:</span>
+<a href="#__codelineno-56-3" id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="go">    1</span>
+<a href="#__codelineno-56-4" id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="go">    0.5</span>
+<a href="#__codelineno-56-5" id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="go">    6</span>
+<a href="#__codelineno-56-6" id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="go">   -4</span>
+<a href="#__codelineno-56-7" id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="go"> true</span>
+</code></pre></div></p>
+<h2 id="_18">更多阅读<a class="headerlink" href="#_18" title="Permanent link">¶</a></h2>
+<p>我们应该在这里提到，这远不是定义函数的完整图景。Julia 拥有一个复杂的类型系统并且允许对参数类型进行多重分派。这里给出的示例都没有为它们的参数提供任何类型注释，意味着它们可以作用于任何类型的参数。类型系统在<a href="@ref man-types">类型</a>中描述，而<a href="@ref">方法</a>则描述了根据运行时参数类型上的多重分派所选择的方法定义函数。</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 Dr. Li Haifeng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.linktheme", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+<script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+<script src="../../javascripts/mathjaxCFG.js"></script>
+<script src="../../MathJax/tex-chtml.js"></script>
+<script src="../../javascripts/refresh_on_toggle_dark_light.js"></script>
+<script src="../../javascripts/highlight.min.js"></script>
+<script src="../../javascripts/mermaid.min.js"></script>
+<script src="../../javascripts/wavedrom_unpkg.js"></script>
+<script src="../../javascripts/wavedrom_skin_default.js"></script>
+</body>
+</html>

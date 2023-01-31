@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://www.drlx.com/" rel="canonical"/>
+<link href="stability/2022/" rel="next"/>
+<link href="assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.7" name="generator"/>
+<title>Deep Reinforcement Learning</title>
+<link href="assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="css/extra.css" rel="stylesheet"/>
+<link href="css/hint.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="light-blue" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#zucc-intersection">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="Deep Reinforcement Learning" class="md-header__button md-logo" data-md-component="logo" href="." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Deep Reinforcement Learning
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href=".">
+      Home
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="stability/2022/">
+        专题分析
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="eec/">
+      EEC
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="math-model/">
+        PowerModule
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="manual/getting-started/">
+        Julia
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="markdown/figure/">
+        Help
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="about/">
+      About
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Deep Reinforcement Learning" class="md-nav__button md-logo" data-md-component="logo" href="." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Deep Reinforcement Learning
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href=".">
+        Home
+      </a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#zucc-intersection">
+    什么是ZUCC INTERSECTION？
+  </a>
+<nav aria-label="什么是ZUCC INTERSECTION？" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    我们的存在是义务的。
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    所有的信息和代码是开放的
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    寻求我们的帮助
+  </a>
+<nav aria-label="寻求我们的帮助" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-lorenz-equations">
+    The Lorenz Equations
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-cauchy-schwarz-inequality">
+    The Cauchy-Schwarz Inequality
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#a-cross-product-formula">
+    A Cross Product Formula
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#an-identity-of-ramanujan">
+    An Identity of Ramanujan
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#a-rogers-ramanujan-identity">
+    A Rogers-Ramanujan Identity
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#maxwells-equations">
+    Maxwell's Equations
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#in-line-mathematics">
+    In-line Mathematics
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    招幕公告
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5">
+    感谢这个框架和主题的作者
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6">
+    自定义设置
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tab">
+    tab
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    可排序表格
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#wavedrom">
+    wavedrom
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8">
+    其它
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          专题分析
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          专题分析
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="stability/2022/">
+        建苏直流
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="stability/GBT40615/">
+        电力系统电压稳定评价导则
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="eec/">
+        EEC
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          PowerModule
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          PowerModule
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="math-model/">
+        The PowerModels Mathematical Model
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Julia
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Julia
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="manual/getting-started/">
+        入门
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="manual/variables/">
+        变量
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="manual/variables-and-scoping/">
+        变量作用域
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="manual/functions/">
+        函数
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="manual/unicode-input/">
+        Unicode输入表
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Help
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Help
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="markdown/figure/">
+        增加图表
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="markdown/common/">
+        常用扩展
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="markdown/txtbar/">
+        进度条
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="about/">
+        About
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1>Home</h1>
+<h2 id="zucc-intersection">什么是ZUCC INTERSECTION？<a class="headerlink" href="#zucc-intersection" title="Permanent link">¶</a></h2>
+<p>我们是一个公益组织，来自ZUCC计算学院，志在为各位ZUCCer提供丰富的生活、学习服务。</p>
+<p>考试周开始了，我们会一直改进题库的。</p>
+<h4 id="_1">我们的存在是义务的。<a class="headerlink" href="#_1" title="Permanent link">¶</a></h4>
+<p>我们不收取任何费用，包括打赏，所有的工作都是义务的，所以加入我们的人也要注意，因为对你自己的好处比较少。</p>
+<h4 id="_2">所有的信息和代码是开放的<a class="headerlink" href="#_2" title="Permanent link">¶</a></h4>
+<p>意味着 <mark>任何人都可以在我们的平台提交自己的资料或者建议</mark> ，帮助我们完善这个仓库。</p>
+<p>我们的 <mark>仓库地址在右上角的导航栏</mark> 中。</p>
+<p>这个仓库的质量完全取决于贡献者的多少、素质，如果你想要让它更好，请务必贡献自己的一份力。</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>程序员务必多喝芝麻，这样头发才会茂密。</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><input id="__tabbed_1_2" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">Tab 1</label><label for="__tabbed_1_2">Tab 2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Markdown <strong>content</strong>.</p>
+<p>Multiple paragraphs.</p>
+</div>
+<div class="tabbed-block">
+<p>More Markdown <strong>content</strong>.</p>
+<ul>
+<li>list item a</li>
+<li>list item b</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="_3">寻求我们的帮助<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
+<p><strong>对于非计算学院的学生，想要给我们提交资料可能会遇到很多技术问题，可以在<a href="about/">关于我们的组织</a>。中找到我们的联系方式。</strong></p>
+<p>关于这个网站和项目的BUG和建议，可以去对应的 <a href="https://github.com/lifeInZUCC/ZUCC-intersection/issues">Github Issues</a> 中发帖，我们会优先解决和答复。</p>
+<p>Here is some code: <code class="highlight"><span class="kn">import</span> <span class="nn">pymdownx</span><span class="p">;</span> <span class="n">pymdownx</span><span class="o">.</span><span class="n">__version__</span></code>.</p>
+<p>The mock shebang will be treated like text here: <code class="highlight"><span class="kd">var</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span></code>.</p>
+<div class="arithmatex">\[\begin{equation}
+E(\mathbf{v}, \mathbf{h}) = -\sum_{i,j}w_{ij}v_i h_j - \sum_i b_i v_i - \sum_j c_j h_j \label{ref-me}
+\end{equation}\]</div>
+<div class="arithmatex">\[3 &lt; 4\]</div>
+<div class="arithmatex">\[\begin{align}
+    p(v_i=1|\mathbf{h}) &amp; = \sigma\left(\sum_j w_{ij}h_j + b_i\right) \\
+    p(h_j=1|\mathbf{v}) &amp; = \sigma\left(\sum_i w_{ij}v_i + c_j\right)  \text{by \eqref{ref-me}} 
+\end{align}\]</div>
+<h3 id="the-lorenz-equations">The Lorenz Equations<a class="headerlink" href="#the-lorenz-equations" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[\begin{align}
+    \dot{x} &amp; = \sigma(y-x) \\
+    \dot{y} &amp; = \rho x - y - xz \\
+    \dot{z} &amp; = -\beta z + xy 
+\end{align}\]</div>
+<h3 id="the-cauchy-schwarz-inequality">The Cauchy-Schwarz Inequality<a class="headerlink" href="#the-cauchy-schwarz-inequality" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+     \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) 
+\]</div>
+<h3 id="a-cross-product-formula">A Cross Product Formula<a class="headerlink" href="#a-cross-product-formula" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\mathbf{V}_1 \times \mathbf{V}_2 =
+       \begin{vmatrix}
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        \frac{\partial X}{\partial u} &amp; \frac{\partial Y}{\partial u} &amp; 0 \\
+        \frac{\partial X}{\partial v} &amp; \frac{\partial Y}{\partial v} &amp; 0 \\
+       \end{vmatrix} 
+\]</div>
+<h3 id="an-identity-of-ramanujan">An Identity of Ramanujan<a class="headerlink" href="#an-identity-of-ramanujan" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+         1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+          {1+\frac{e^{-8\pi}} {1+\ldots} } } } 
+\]</div>
+<h3 id="a-rogers-ramanujan-identity">A Rogers-Ramanujan Identity<a class="headerlink" href="#a-rogers-ramanujan-identity" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+        \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+         \quad \text{for $|q| &lt; 1$}.
+\]</div>
+<h3 id="maxwells-equations">Maxwell's Equations<a class="headerlink" href="#maxwells-equations" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[\begin{align}
+      \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\
+      \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+      \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+      \nabla \cdot \vec{\mathbf{B}} &amp; = 0 
+\end{align}\]</div>
+<h3 id="in-line-mathematics">In-line Mathematics<a class="headerlink" href="#in-line-mathematics" title="Permanent link">¶</a></h3>
+<p>The probability of getting <span class="arithmatex">\(k\)</span> heads when flipping <span class="arithmatex">\(n\)</span> coins is: <span class="arithmatex">\(P(E) = {n \choose k} p^k (1-p)^{ n-k}\)</span></p>
+<p>Finally, while display equations look good for a page of samples, the ability to mix math and text in a paragraph is also important. This expression <span class="arithmatex">\(\sqrt{3x-1}+(1+x)^2\)</span>
+ is an example of an inline equation. As you see, MathJax equations can be used this way as well, without unduly disturbing the spacing between lines.</p>
+<div class="highlight"><span class="filename">Python</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_4">招幕公告<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
+<p>我们正在招收一名宣传人员，帮我们做日常的管理和宣传，具体请查看<a href="about/">关于我们的组织</a>。</p>
+<p>我们正在急需技术人员，主要是 JS 和 Python 方面的，有兴趣也可以参考<a href="about/">关于我们的组织</a>。 你可以借着我们的平台锻炼一下你的技术。</p>
+<p>学长们总有一天会毕业，我们希望可以找人继承我们的项目。同时，还有一些低年级的课程我们的资料库不是很全，所以希望有低年级的学生加入我们。</p>
+<div class="admonition abstract">
+<p class="admonition-title">代码摘要</p>
+<p>很久很久以前，巨龙突然出现，带来灾难，带走了公主又消失不见。王国十分危险，世间谁最勇敢，一位勇者赶来，大声喊，我要带上最好的剑，翻过最高的山，闯进最深的森林，把公主带回到面前。</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">def</span> <span class="nf">run_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="n">mypath</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"..\solver"</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">mypath</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="hll">    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"bpapf.exe"</span><span class="p">)</span> <span class="c1">#(1)</span>
+</span><a id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="n">pathreset</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"..\src"</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">pathreset</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> I'm a code annotation! I can contain <code class="highlight">code</code>, <strong>formatted
+    text</strong>, images, ... basically anything that can be expressed in Markdown.</li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">important.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">def</span> <span class="nf">run_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="n">mypath</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"..\solver"</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">mypath</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="hll">    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"bpapf.exe"</span><span class="p">)</span>
+</span><a id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="n">pathreset</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"..\src"</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">pathreset</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="k">def</span> <span class="nf">check_success_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'../curDat.pf'</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">'gbk'</span><span class="p">)</span> <span class="k">as</span> <span class="n">logf</span><span class="p">:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="hll">        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="s1">'*** POWER FLOW SOLUTION IS REACHED'</span> \
+</span><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="hll">                    <span class="ow">in</span> <span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">logf</span><span class="p">)</span>
+</span><a id="__codelineno-2-12" name="__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="c1">#render means send raw to solver, output the new state</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episode</span><span class="p">,</span> <span class="n">ori_raw_file</span><span class="p">):</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">add_zeroes</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">lines_cut</span> <span class="o">=</span> <span class="p">[]</span> 
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>    <span class="c1">#run powerflow solver</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">run_solver</span><span class="p">()</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_success_run</span><span class="p">():</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="p">[]</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25"></a>
+<a id="__codelineno-2-26" name="__codelineno-2-26"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">,</span>\
+<a id="__codelineno-2-27" name="__codelineno-2-27"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">lower_bound</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_bound</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oparser</span><span class="o">.</span><span class="n">read_state</span><span class="p">()</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28"></a>
+<a id="__codelineno-2-29" name="__codelineno-2-29"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="_5">感谢这个框架和主题的作者<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
+<p>为啥没效果？？？</p>
+<ul>
+<li><span class="twemoji medium"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"></path></svg></span> – Medium</li>
+<li><span class="twemoji twitter"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg></span> – Twitter</li>
+<li><span class="twemoji facebook"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path></svg></span> – Facebook</li>
+</ul>
+<h2 id="_6">自定义设置<a class="headerlink" href="#_6" title="Permanent link">¶</a></h2>
+<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>. And <abbr title="Deep Reinforcement Learning">DRL</abbr> is new.</p>
+<div class="admonition info inline">
+<p class="admonition-title">Info</p>
+<p>Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. Nulla et euismod nulla.
+Curabitur feugiat, tortor non consequat
+finibus, justo purus auctor massa, nec
+semper lorem quam in massa.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"/><input id="__tabbed_2_2" name="__tabbed_2" type="radio"/><div class="tabbed-labels"><label for="__tabbed_2_1">Unordered list</label><label for="__tabbed_2_2">Ordered list</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Sed sagittis eleifend rutrum</li>
+<li>Donec vitae suscipit est</li>
+<li>Nulla tempor lobortis orci</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>Sed sagittis eleifend rutrum</li>
+<li>Donec vitae suscipit est</li>
+<li>Nulla tempor lobortis orci</li>
+</ol>
+</div>
+</div>
+</div>
+<h2 id="tab">tab<a class="headerlink" href="#tab" title="Permanent link">¶</a></h2>
+<p>当<code class="highlight">SuperFences</code>被启用<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>，内容的选项卡可以包含任意嵌套的内容，包括另外的内容的标签<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>，并且可以被嵌套在其它块一样告诫或引用文字：</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"/><input id="__tabbed_3_2" name="__tabbed_3" type="radio"/><div class="tabbed-labels"><label for="__tabbed_3_1">Unordered List</label><label for="__tabbed_3_2">Ordered List</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><em>Example</em>:</p>
+<div class="highlight"><span class="filename">Markdown</span><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">*</span><span class="w"> </span>Sed sagittis eleifend rutrum
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">*</span><span class="w"> </span>Donec vitae suscipit est
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="k">*</span><span class="w"> </span>Nulla tempor lobortis orci
+</code></pre></div>
+<p><em>Result</em>:</p>
+<ul>
+<li>Sed sagittis eleifend rutrum</li>
+<li>Donec vitae suscipit est</li>
+<li>Nulla tempor lobortis orci</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p><em>Example</em>:</p>
+<div class="highlight"><span class="filename">Markdown</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">1.</span> Sed sagittis eleifend rutrum
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">2.</span> Donec vitae suscipit est
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="k">3.</span> Nulla tempor lobortis orci
+</code></pre></div>
+<p><em>Result</em>:</p>
+<ol>
+<li>Sed sagittis eleifend rutrum</li>
+<li>Donec vitae suscipit est</li>
+<li>Nulla tempor lobortis orci</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<h2 id="_7">可排序表格<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="highlight">GET</code></td>
+<td><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7Z"></path></svg></span>     Fetch resource</td>
+</tr>
+<tr>
+<td><code class="highlight">PUT</code></td>
+<td><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41L18 7Z"></path></svg></span> Update resource</td>
+</tr>
+<tr>
+<td><code class="highlight">DELETE</code></td>
+<td><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg></span>     Delete resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="wavedrom">wavedrom<a class="headerlink" href="#wavedrom" title="Permanent link">¶</a></h2>
+<p>embed your wavedrom code in markdown documents.</p>
+<div class="highlight"><span class="filename">GDScript</span><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">{</span><span class="w"> </span><span class="k">signal</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s1">'Alfa'</span><span class="p">,</span><span class="w"> </span><span class="n">wave</span><span class="p">:</span><span class="w"> </span><span class="s1">'01.zx=ud.23.45'</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">}</span><span class="w">  </span>
+</code></pre></div>
+<h2 id="_8">其它<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+massa, nec semper lorem quam in massa. <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 Dr. Li Haifeng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": ".", "features": ["content.code.annotate", "content.tabs.linktheme", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+<script src="assets/javascripts/bundle.a00a7c5e.min.js"></script>
+<script src="javascripts/mathjaxCFG.js"></script>
+<script src="MathJax/tex-chtml.js"></script>
+<script src="javascripts/refresh_on_toggle_dark_light.js"></script>
+<script src="javascripts/highlight.min.js"></script>
+<script src="javascripts/mermaid.min.js"></script>
+<script src="javascripts/wavedrom_unpkg.js"></script>
+<script src="javascripts/wavedrom_skin_default.js"></script>
+</body>
+</html>

@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://www.drlx.com/manual/variables-and-scoping/" rel="canonical"/>
+<link href="../variables/" rel="prev"/>
+<link href="../functions/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.7" name="generator"/>
+<title>变量作用域 - Deep Reinforcement Learning</title>
+<link href="../../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../css/extra.css" rel="stylesheet"/>
+<link href="../../css/hint.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="light-blue" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#_1">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="Deep Reinforcement Learning" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Deep Reinforcement Learning
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              变量作用域
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+      Home
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../stability/2022/">
+        专题分析
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../eec/">
+      EEC
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../math-model/">
+        PowerModule
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../getting-started/">
+        Julia
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../markdown/figure/">
+        Help
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../about/">
+      About
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Deep Reinforcement Learning" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Deep Reinforcement Learning
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          专题分析
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          专题分析
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stability/2022/">
+        建苏直流
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../stability/GBT40615/">
+        电力系统电压稳定评价导则
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../eec/">
+        EEC
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          PowerModule
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          PowerModule
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../math-model/">
+        The PowerModels Mathematical Model
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Julia
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Julia
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../getting-started/">
+        入门
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../variables/">
+        变量
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          变量作用域
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        变量作用域
+      </a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    作用域结构
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    全局作用域
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    局部作用域
+  </a>
+<nav aria-label="局部作用域" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5">
+    在软作用域
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#let">
+    Let 块
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6">
+    循环和数组推导
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    常量
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../functions/">
+        函数
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../unicode-input/">
+        Unicode输入表
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Help
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Help
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/figure/">
+        增加图表
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/common/">
+        常用扩展
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/txtbar/">
+        进度条
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../about/">
+        About
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="_1"><a href="@id scope-of-variables">变量作用域</a><a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
+<p>变量的 <strong>作用域</strong> 是代码的一个区域，在这个区域中这个变量是可见的。给变量划分作用域有助于解决变量命名冲突。这个概念是符合直觉的：两个函数可能同时都有叫做 <code class="highlight">x</code> 的参量，而这两个 <code class="highlight">x</code> 并不指向同一个东西。
+相似地，也有很多其他的情况，代码的不同块会使用同样名字，但并不指向同一个东西。相同的变量名是否指向同一个东西的规则被称为作用域规则；这一节会详细地把这个规则讲清楚。</p>
+<p>语言中的某些结构会引入*作用域块*，这是可以成为一些变量集合的作用域的代码区域。一个变量的作用域不是源代码行的任意集合；相反，它始终与这些块之一关系密切。在 Julia 中主要有两种作用域，<em>全局作用域</em> 与 <em>局部作用域</em>，后者可以嵌套。 在 Julia 中还存在引入“硬作用域”的构造和只引入“软作用域”的构造之间的区别，这影响到是否允许以相同的名称<a href="https://en.wikipedia.org/wiki/Variable_shadowing">遮蔽</a>全局变量。</p>
+<h3 id="_2"><a href="@id man-scope-table">作用域结构</a><a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<p>引入作用域块的结构有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">结构</th>
+<th align="left">作用域类型</th>
+<th align="left">允许使用在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="@ref"><code class="highlight"><span class="k">module</span></code></a>, <a href="@ref"><code class="highlight">baremodule</code></a></td>
+<td align="left">全局</td>
+<td align="left">全局</td>
+</tr>
+<tr>
+<td align="left"><a href="@ref"><code class="highlight">struct</code></a></td>
+<td align="left">局部（软）</td>
+<td align="left">全局</td>
+</tr>
+<tr>
+<td align="left"><a href="@ref"><code class="highlight"><span class="k">for</span></code></a>, <a href="@ref"><code class="highlight"><span class="k">while</span></code></a>, <a href="@ref try"><code class="highlight">try</code></a></td>
+<td align="left">局部（软）</td>
+<td align="left">global, local</td>
+</tr>
+<tr>
+<td align="left"><a href="@ref"><code class="highlight">macro</code></a></td>
+<td align="left">局部（硬）</td>
+<td align="left">全局</td>
+</tr>
+<tr>
+<td align="left">函数， <a href="@ref"><code class="highlight"><span class="k">do</span></code></a> 语句块, <a href="@ref"><code class="highlight">let</code></a>语句块, 数组推导, 生成器</td>
+<td align="left">局部（硬）</td>
+<td align="left">global, local</td>
+</tr>
+</tbody>
+</table>
+<p>值得注意的是，这个表内没有的是 <a href="@ref man-compound-expressions">begin 块</a>和<a href="@ref man-conditional-evaluation"> if 块</a>，这两个块**不会**引进新的作用域块。这两种作用域遵循的规则有点不一样，会在下面解释。</p>
+<p>Julia 使用<a href="https://en.wikipedia.org/wiki/Scope_%28computer_science%29#Lexical_scoping_vs._dynamic_scoping">词法作用域</a>，也就是说一个函数的作用域不继承自调用了函数的调用者作用域，而继承自该函数定义处作用域。举例如下，<code class="highlight">foo</code> 中的 <code class="highlight">x</code> 指向模块 <code class="highlight">Bar</code> 的全局作用域中 <code class="highlight">x</code>。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="n">Bar</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">           </span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+</code></pre></div>
+<p>而非调用了 <code class="highlight">foo</code> 的作用域中的 <code class="highlight">x</code>：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">import</span><span class="w"> </span><span class="o">.</span><span class="n">Bar</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Bar</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">1</span>
+</code></pre></div></p>
+<p>因此**词法作用域**意味着，某段代码内某变量的指向只从它出现之处就可以推断出来，而不依赖于程序的执行方式。在嵌套的作用域结构里，内层作用域能”看“到所有外层作用域内变量。相对地，外层作用域不能看到内层作用域的变量。</p>
+<h2 id="_3">全局作用域<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
+<p>每个模块会引进一个新全局作用域，与其他所有模块的全局作用域分开；无所不包的全局作用域不存在。模块可以把其他模块的变量引入到它的作用域中，通过<a href="@ref modules">using 或者 import</a>语句或者通过点符号这种有资格的通路，也就是说每个模块都是所谓的*命名空间*或者关联着含值的名字的第一类数据结构。值得注意的是，即便变量绑定能在外部被读取，变量绑定也只能在它们的全局作用域中改变。
+作为一个逃生窗口，你总是可以执行该模块内代码来修改一个变量；这特别保证了不调用 <code class="highlight">eval</code> 的外部代码绝不会修改模块绑定。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="n">A</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">           </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c"># a global in A's scope</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="n">B</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">           </span><span class="k">module</span><span class="w"> </span><span class="n">C</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">               </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">           </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">c</span><span class="w">    </span><span class="c"># can access the namespace of a nested global scope</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">                      </span><span class="c"># through a qualified access</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">           </span><span class="k">import</span><span class="w"> </span><span class="o">..</span><span class="n">A</span><span class="w"> </span><span class="c"># makes module A available</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">           </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">.</span><span class="n">a</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="n">D</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">           </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c"># errors as D's global scope is separate from A's</span>
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="gr">ERROR: UndefVarError: a not defined</span>
+<a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>
+<a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">module</span><span class="w"> </span><span class="n">E</span>
+<a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">           </span><span class="k">import</span><span class="w"> </span><span class="o">..</span><span class="n">A</span><span class="w"> </span><span class="c"># make module A available</span>
+<a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="w">           </span><span class="n">A</span><span class="o">.</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">    </span><span class="c"># throws below error</span>
+<a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="gr">ERROR: cannot assign variables in other modules</span>
+</code></pre></div>
+<p>注意交互式提示行（即REPL）是在模块<code class="highlight">Main</code>的全局作用域中。</p>
+<h2 id="_4">局部作用域<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
+<p>大多数代码块都引入了新的局部作用域（完整<a href="@ref man-scope-table">列表</a>请参见上表）。如果这样的代码块在语法上嵌套在另一个局部作用域内，则它创建的作用域嵌套在它出现的所有局部作用域内，这些局部作用域最终都嵌套在评估代码的模块的全局作用域内。 外部作用域中的变量在它们包含的任何作用域中都是可见的——这意味着它们可以在内部作用域中读取和写入——除非有一个同名的局部变量“遮蔽”了同名的外部变量。 即使外部的本地变量是在内部块之后（在下面的文本意义上）声明的，也是如此。 当我们说一个变量在给定范围内“存在”时，这意味着具有该名称的变量存在于当前范围嵌套在其中的任何范围内，包括当前范围。</p>
+<p>一些编程语言需要在使用新变量之前显式声明它们。显式声明也适用于 Julia：在任何局部作用域中，编写 <code class="highlight">local x</code> 都会在该作用域中声明一个新的局部变量，无论外部作用域中是否已经存在名为 <code class="highlight">x</code> 的变量。像这样声明每个新变量有点冗长乏味，但是，与许多其他语言一样，Julia 考虑对不存在的变量名称进行赋值以隐式声明该变量。如果当前作用域是全局的，则新变量是全局的；如果当前作用域是局部的，则新变量对最内部的局部作用域是局部的，并且在该作用域内可见，但在该作用域外不可见。如果你给现有的局部变量赋值，它_总是_更新现有的局部变量：你只能通过使用 <code class="highlight">local</code> 关键字在嵌套范围内显式声明新的局部变量来隐藏原局部变量。特别是，这适用于在内部函数中分配的变量，这可能会让来自 Python 的用户感到惊讶，其中内部函数中的赋值会创建一个新的局部变量，除非该变量被明确声明为非局部变量。</p>
+<p>大多数情况下，这是非常直观的，但与许多直觉行为一样，细节比人们天真地想象的要微妙得多。</p>
+<p>当 <code class="highlight">x = &lt;value&gt;</code> 出现在某局部作用域，Julia 根据赋值表达式出现位置、 <code class="highlight">x</code> 在此处已经引用的内容，采取如下规则确定表达式的意义：</p>
+<ol>
+<li><strong>现存的局部变量：**如果 <code class="highlight">x</code> **已经是一个局部变量</strong>，那现存的局部变量 <code class="highlight">x</code> 将被
+   赋值；</li>
+<li>
+<p>**硬作用域：如果 <code class="highlight">x</code> 还*不是局部变量*并且赋值发生的作用域结构是硬作用域（即在 <code class="highlight">let</code> 语句块、函数体、宏、推导式或生成器中），则会在赋值作用域中创建一个名为 <code class="highlight">x</code> 的新局部变量；</p>
+</li>
+<li>
+<p><strong>软作用域：**如果 <code class="highlight">x</code> **并非已经是局部变量</strong>，并且所有包含
+   此次赋值的作用域结构是软作用域（循环、<code class="highlight">try</code>/<code class="highlight">catch</code> 块、或者 <code class="highlight">struct</code> 块），
+   最后行为取决于全局变量 <code class="highlight">x</code> 是否被定义：</p>
+</li>
+<li>如果全局变量 <code class="highlight">x</code> 是**未定义**，最终此次赋值会在该作用域创建一个名为 <code class="highlight">x</code> 的新局部变量
+     ；</li>
+<li>如果全局变量 <code class="highlight">x</code> 是**已定义**，此次赋值会被认为是有歧义的：<ul>
+<li>在**非交互**的上下文（文件、eval）中，会打印一个有歧义警告，同时创建一个新
+   局部变量；</li>
+<li>在**交互**的上下文（REPL, notebooks）中，会向全局变量 <code class="highlight">x</code> 赋值。</li>
+</ul>
+</li>
+</ol>
+<p>你或许注意到，当某隐性局部变量（比如未经 <code class="highlight">local x</code> 声明）遮掩某全局变量，非交互的上下文中硬作用域和软作用域有相同行为，除了会输出警告。方便起见，交互的上下文遵从一套更复杂的启发式规则。下面的例子将会深入讲解。</p>
+<p>既然你知道这个规则，那就看看一些例子。每个例子都是一个新的REPL会话中进行的，因此每个片段中唯一的全局变量就是在该代码块中分配的全局变量。</p>
+<p>我们将从一个良好且明确的情况开始——在一个硬作用域内赋值，在这个情况下是一个函数体，当同名的局部变量不存在时：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">greet</span><span class="p">()</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hello"</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">           </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="go">greet (generic function with 1 method)</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">greet</span><span class="p">()</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="go">hello</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="gr">ERROR: UndefVarError: x not defined</span>
+</code></pre></div>
+<p>在 <code class="highlight">greet</code> 函数内部，赋值 <code class="highlight">x = "hello"</code> 导致 <code class="highlight">x</code> 成为函数作用域中的一个新局部变量。 有两个相关的事实：赋值发生在局部作用域内，并且没有现有的局部 <code class="highlight">x</code> 变量。 由于 <code class="highlight">x</code> 是局部的，所以是否存在名为 <code class="highlight">x</code> 的全局变量并不重要。 例如，我们在定义和调用 <code class="highlight">greet</code> 之前定义了 <code class="highlight">x = 123</code>：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="go">123</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">greet</span><span class="p">()</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hello"</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">           </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="go">greet (generic function with 1 method)</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">greet</span><span class="p">()</span>
+<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="go">hello</span>
+<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>
+<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="go">123</span>
+</code></pre></div>
+<p>由于 <code class="highlight">greet</code> 中的 <code class="highlight">x</code> 是局部的，全局 <code class="highlight">x</code> 的值（或缺少值）不会受到调用 <code class="highlight">greet</code> 的影响。 硬作用域规则不关心名为 <code class="highlight">x</code> 的全局变量是否存在：在硬作用域中对 <code class="highlight">x</code> 的赋值是局部的（除非 <code class="highlight">x</code> 被声明为全局的）。</p>
+<p>我们将考虑的下一个明确的情况是已经有一个名为<code class="highlight">x</code>的局部变量，在这种情况下，<code class="highlight">x = 1</code>总是赋值给这个现有的局部<code class="highlight">x</code>。 无论赋值发生在同一局部作用域、同一函数体的内部局部作用域，还是嵌套在另一个函数内部的函数体（也称为 <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">闭包</a>）。</p>
+<p>我们将使用 <code class="highlight">sum_to</code> 函数，它计算从 1 到 <code class="highlight">n</code> 的整数之和，例如：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">function</span><span class="w"> </span><span class="n">sum_to</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="c"># assign existing local</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="k">end</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="c"># same local</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="k">end</span>
+</code></pre></div>
+<p>与前面的示例一样，在 <code class="highlight">sum_to</code> 函数先对 <code class="highlight">s</code> 的第一次赋值导致 <code class="highlight">s</code> 成为函数体中的一个新局部变量。 <code class="highlight"><span class="k">for</span></code> 循环在函数作用域内有自己的内部局部作用域。 在 <code class="highlight">s = s + i</code> 出现的地方，<code class="highlight">s</code> 已经是一个局部变量，所以赋值更新了现有的 <code class="highlight">s</code> 而不是创建一个新的局部变量。 我们可以通过在 REPL 中调用 <code class="highlight">sum_to</code> 来测试：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">sum_to</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">           </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">           </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">               </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="c"># assign existing local</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="c"># same local</span>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="go">sum_to (generic function with 1 method)</span>
+<a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>
+<a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sum_to</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="go">55</span>
+<a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a>
+<a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="gr">ERROR: UndefVarError: s not defined</span>
+</code></pre></div>
+<p>由于 <code class="highlight">s</code> 是函数 <code class="highlight">sum_to</code> 的局部变量，调用该函数对全局变量 <code class="highlight">s</code> 没有影响。 我们还可以看到，<code class="highlight"><span class="k">for</span></code> 循环中的更新 <code class="highlight">s = s + i</code> 必须更新由初始化 <code class="highlight">s = 0</code> 创建的相同 <code class="highlight">s</code>，因为我们得到了整数 1 到 10 的正确总和 55。</p>
+<p>让我们通过编写一个稍微详细一点的变体来深入了解一下 <code class="highlight"><span class="k">for</span></code> 循环体有自己的作用域，我们将其称为 <code class="highlight">sum_to_def</code>，其中，在更新 <code class="highlight">s</code> 之前，我们将和 <code class="highlight">s + i</code> 保存在一个变量中<code class="highlight">t</code> ：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">sum_to_def</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">           </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">           </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">               </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="c"># new local `t`</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">               </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="c"># assign existing local `s`</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="nd">@isdefined</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="go">sum_to_def (generic function with 1 method)</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sum_to_def</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="go">(55, false)</span>
+</code></pre></div>
+<p>这个版本像先前一样返回 <code class="highlight">s</code>，但它也使用 <code class="highlight"><span class="nv">@isdefined</span></code> 宏返回一个布尔值，指示是否在函数的最外层局部作用域中定义了一个名为 <code class="highlight">t</code> 的局部变量。 正如你所看到的，在 <code class="highlight"><span class="k">for</span></code> 循环体之外没有定义 <code class="highlight">t</code>。 这又是因为硬作用域规则：由于对 <code class="highlight">t</code> 的赋值发生在一个函数内部，这引入了一个硬作用域，赋值导致 <code class="highlight">t</code> 在它出现的局部作用域中成为一个新的局部变量，即循环体内部。 即使有一个名为 <code class="highlight">t</code> 的全局变量，它也没有任何区别——硬作用域规则不受全局作用域中的任何内容的影响。</p>
+<p>请注意，for 循环体的局部作用域与内部函数的局部作用域没有区别。 这意味着我们可以重写此示例，以便将循环体实现为对内部辅助函数的调用，并且其行为方式相同：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">sum_to_def_closure</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">           </span><span class="k">function</span><span class="w"> </span><span class="n">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">               </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="c"># new local `t`</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">               </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="c"># assign same local `s` as below</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">           </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">           </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">               </span><span class="n">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="nd">@isdefined</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="go">sum_to_def_closure (generic function with 1 method)</span>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">sum_to_def_closure</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="go">(55, false)</span>
+</code></pre></div>
+<p>这个例子说明了几个要点：</p>
+<ol>
+<li>
+<p>内部函数作用域就像任何其他嵌套的局部作用域一样。 特别是，如果一个变量已经是内部函数之外的局部变量，并且你在内部函数中为其赋值，则外部局部变量会被更新。</p>
+</li>
+<li>
+<p>外部的局部变量的定义是否发生在更新位置的下方并不重要，规则保持不变。在解析内部的局部变量含义之前，解析整个封闭局部作用域并确定其局部变量。</p>
+</li>
+</ol>
+<p>这种设计意味着你通常可以将代码移入或移出内部函数而不改变其含义，这给使用闭包语言中的许多常见习语提供了便利。（参见 <a href="@ref Do-Block-Syntax-for-Function-Arguments">do blocks</a>)。</p>
+<p>让我们继续讨论软作用域规则涵盖的一些更模糊的情况。 我们将通过将 <code class="highlight">gree</code>t 和 <code class="highlight">sum_to_def</code>函数的主体提取到软作用域上下文中来探索这一点。 首先，让我们将 <code class="highlight">greet</code> 的主体放在一个 <code class="highlight"><span class="k">for</span></code> 循环中——它是软的，而不是硬的——并在 REPL 中运行：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">           </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hello"</span><span class="w"> </span><span class="c"># new local</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">           </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="go">hello</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="go">hello</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="go">hello</span>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="gr">ERROR: UndefVarError: x not defined</span>
+</code></pre></div>
+<p>由于在执行<code class="highlight"><span class="k">for</span></code>循环时未定义全局变量<code class="highlight">x</code>，因此软作用域规则的第一个子句适用，并且<code class="highlight">x</code>被创建为<code class="highlight"><span class="k">for</span></code>循环内的局部变量，因此循环执行完后全局变量<code class="highlight">x</code>一直没有定义 。 接下来，让我们考虑提取到全局作用域内的 <code class="highlight">sum_to_def</code> 的函数体，将其参数固定为 <code class="highlight">n = 10</code></p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="k">end</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="n">s</span>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="nd">@isdefined</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+<p>这段代码有什么作用？ 提示：这是一个小把戏。 答案是“视情况而定”。 如果此代码以交互方式输入，则其行为方式与在函数体中的行为方式相同。 但是如果代码出现在文件中，它会打印一个歧义警告并抛出一个未定义的变量错误。 让我们先看看它在 REPL 中的情况：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="go">0</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">           </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="c"># new local `t`</span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">           </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="c"># assign global `s`</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>
+<a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="go">55</span>
+<a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a>
+<a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="nd">@isdefined</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="c"># global</span>
+<a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="go">false</span>
+</code></pre></div>
+<p>REPL 内行为接近于函数体内，决定循环内部的赋值是分配给一个全局变量还是创建新的局部变量，取决于是否定义了具有该名称的全局变量。 如果存在同名的全局变量，则赋值会更新它。 如果不存在全局变量，则赋值会创建一个新的局部变量。 在这个例子中，我们看到两种情况都在起作用：</p>
+<ul>
+<li>没有名为 <code class="highlight">t</code> 的全局变量，因此 <code class="highlight">t = s + i</code> 创建了一个新的 <code class="highlight">t</code>，它是 <code class="highlight"><span class="k">for</span></code> 循环的局部变量；</li>
+<li>有一个名为 <code class="highlight">s</code> 的全局变量，因此将 <code class="highlight">s = t</code> 赋值给它。</li>
+</ul>
+<p>第二个情况解释了为什么循环的执行会改变 <code class="highlight">s</code> 的全局值，第一个情况解释了为什么在循环执行后 <code class="highlight">t</code> 仍未定义。 现在，让我们尝试运行相同的代码，就像它在文件中一样：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">      </span><span class="s"> s = 0 # global</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">      </span><span class="s"> for i = 1:10</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">      </span><span class="s">     t = s + i # new local `t`</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">      </span><span class="s">     s = t # new local `s` with warning</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">      </span><span class="s"> end</span>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">      </span><span class="s"> s, # global</span>
+<a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">      </span><span class="s"> @isdefined(t) # global</span>
+<a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">      </span><span class="s"> """</span><span class="p">;</span>
+<a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a>
+<a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">include_string</span><span class="p">(</span><span class="n">Main</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">)</span>
+<a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="go">┌ Warning: Assignment to `s` in soft scope is ambiguous because a global variable by the same name exists: `s` will be treated as a new local. Disambiguate by using `local s` to suppress this warning or `global s` to assign to the existing global variable.</span>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="go">└ @ string:4</span>
+<a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="gr">ERROR: LoadError: UndefVarError: s not defined</span>
+</code></pre></div>
+<p>这里我们使用 <a href="@ref"><code class="highlight">include_string</code></a> 来评估 <code class="highlight">code</code>，就好像它是文件的内容一样。 我们也可以将 <code class="highlight">code</code> 保存到一个文件中，然后对该文件调用 <code class="highlight"><span class="k">include</span></code>——结果是一样的。 如你所见，这与在 REPL 中评估相同代码的行为完全不同。 让我们分解一下这里发生的事情：</p>
+<ul>
+<li>在循环运行之前，全局 <code class="highlight">s</code> 被定义为值 <code class="highlight"><span class="mf">0</span></code></li>
+<li>
+<p>赋值 <code class="highlight">s = t</code> 发生在软作用域中——任何函数体或其他硬作用域结构之外的 <code class="highlight"><span class="k">for</span></code> 循环</p>
+</li>
+<li>
+<p>因此软作用域规则的第二个子句适用，并且分配不明确，因此发出警告</p>
+</li>
+<li>
+<p>继续执行，使 <code class="highlight">s</code> 成为 <code class="highlight"><span class="k">for</span></code> 循环体中的局部作用域</p>
+</li>
+<li>由于 <code class="highlight">s</code> 是 <code class="highlight"><span class="k">for</span></code> 循环的局部变量，所以在计算 <code class="highlight">t = s + i</code> 时它是未定义的，从而导致错误</li>
+<li>求值到此就结束了，但如果到了 <code class="highlight">s</code> 和 <code class="highlight"><span class="nv">@isdefined</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></code>，它将返回 <code class="highlight"><span class="mf">0</span></code> 和 <code class="highlight">false</code>。</li>
+</ul>
+<p>这展示了作用域的一些重要方面：在一个作用域中，每个变量只能有一个含义，而该含义的确定与表达式的顺序无关。 循环中表达式 <code class="highlight">s = t</code> 的存在导致 <code class="highlight">s</code> 在循环中是局部的，这意味着当它出现在 <code class="highlight">t = s + i</code> 的右侧时它也是局部的，即使该表达式首先出现并首先计算。 有人可能会想象循环第一行上的 <code class="highlight">s</code> 可以是全局的，而循环第二行上的 <code class="highlight">s</code> 是局部的，但这是不可能的，因为这两行在同一个作用域块中并且每个变量 在给定的作用域内只能有一种含义。</p>
+<h4 id="_5">在软作用域<a class="headerlink" href="#_5" title="Permanent link">¶</a></h4>
+<p>我们现在已经涵盖了所有局部作用域规则，但在结束本节之前，也许应该说几句关于为什么在交互式和非交互式上下文中处理模糊软作用域的情况不同。 人们可以问两个明显的问题：</p>
+<ol>
+<li>为什么不都像REPL那样？</li>
+<li>为什么不都表现得像在文件中那样？并跳过警告？</li>
+</ol>
+<p>在 Julia ≤ 0.6 的版本中，所有全局作用域确实像当前的 REPL 一样工作：当 <code class="highlight">x = &lt;value&gt;</code> 发生在循环中（或 <code class="highlight">try</code>/<code class="highlight">catch</code> ，<code class="highlight">struct</code>内）但在函数体（或 <code class="highlight">let</code> 语句块或推导式）之外时，它根据是否定义了一个名为 <code class="highlight">x</code> 的全局变量来决定 <code class="highlight">x</code> 是否应该是循环的局部变量。这种行为具有直观和方便的优点，因为它尽可能接近函数体内部的行为。特别是，当尝试调试函数时，它可以轻松地在函数体和 REPL 之间来回移动代码。 但是，它有一些缺点。首先，这是一种相当复杂的行为：多年来，许多人对这种行为感到困惑，并抱怨说它既复杂又难以解释和理解。这是有道理的。其次，可以说更糟的是，它不利于“大规模”编程。 当你在这样的地方看到一小段代码时，很清楚发生了什么：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="k">end</span>
+</code></pre></div>
+<p>显然，代码的意图是修改现有的全局变量<code class="highlight">s</code>。 这还能是什么意思？ 然而，并非所有现实世界的代码都如此简短或清晰。 我们发现像下面这样的代码经常出现：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c"># much later</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="c"># maybe in a different file</span>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>
+<a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hello"</span>
+<a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="k">end</span>
+<a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>
+<a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="c"># much later</span>
+<a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="c"># maybe in yet another file</span>
+<a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="c"># or maybe back in the first one where `x = 123`</span>
+<a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a>
+<a href="#__codelineno-14-15" id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">234</span>
+</code></pre></div>
+<p>我们非常不清楚这里应该发生什么。 由于 <code class="highlight">x + "hello"</code> 是一个方法错误，似乎意图是让 <code class="highlight">x</code> 在 <code class="highlight"><span class="k">for</span></code> 循环中是局部的。 但是运行时值和碰巧存在的方法不能用于确定变量的范围。 对于 Julia ≤ 0.6 的行为，尤其令人担忧的是，有人可能先编写了 <code class="highlight"><span class="k">for</span></code> 循环，让它工作得很好，但后来当其他人在远处添加了一个新的全局时——可能是在不同的文件——代码突然改变了含义，要么中断，要么更糟糕的是，默默地做执行了错误的命令。 这种 <a href="https://en.wikipedia.org/wiki/Action_at_a_distance_(computer_programming)">“幽灵般的远距离动作”</a> 是好的编程语言设计应该防止的。</p>
+<p>因此，在 Julia 1.0 中，我们简化了作用域的规则：在任何局部作用域中，对一个还不是局部变量的名称进行赋值会创建一个新的局部变量。 这完全消除了软作用域的概念，并消除了幽灵行为的可能性。 由于移除了软作用域，我们发现并修复了大量错误，证明我们选择摆脱它是正确的。我们有很多的欣喜！ 嗯，不，不是真的。 因为有些人很生气，他们现在不得不写：</p>
+<div class="highlight"><span class="filename">Julia</span><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="k">global</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="k">end</span>
+</code></pre></div>
+<p>你看到那里的<code class="highlight">global</code>注解了吗？非常令人讨厌。 显然，这种情况是不能容忍的。但更严重的是，这种需要<code class="highlight">global</code>顶层代码的情况有两个主要问题：</p>
+<ol>
+<li>
+<p>从函数体内部复制和粘贴代码到 REPL 来debug不再方便——你必须加上<code class="highlight">global</code>注释，然后把它删了再复制回去。</p>
+</li>
+<li>
+<p>初学者编写这种代码往往不会加 <code class="highlight">global</code> ，并且不知道为什么他们的代码不起作用 - 他们得到的错误是 <code class="highlight">s</code> 未定义，这似乎并没有启发犯错的人。</p>
+</li>
+</ol>
+<p>从 Julia 1.5 开始，此代码在 REPL 或 Jupyter 笔记本（就像 Julia 0.6）等交互式上下文中无需<code class="highlight">global</code>注解即可正确执行，同时，在文件和其他非交互式上下文中，它会打印出以下非常直接的警告：</p>
+<blockquote>
+<p>在软作用域中对 <code class="highlight">s</code> 的赋值是不明确的，因为存在同名的全局变量：<code class="highlight">s</code> 将被视为新的局部变量。 通过使用 <code class="highlight">local s</code> 来消除此警告或使用 <code class="highlight">global s</code> 赋值给现有的全局变量来消除歧义。</p>
+</blockquote>
+<p>这解决了这两个问题，同时保留了 1.0 行为的“大规模编程”好处：全局变量对可能很远的代码的含义没有幽灵般的影响； 在 REPL 复制粘贴调试工作，初学者没有任何问题； 任何时候有人忘记<code class="highlight">global</code>注解或不小心用软作用域中的局部变量遮蔽了现有的全局变量，这无论如何都会令人困惑，他们会得到一个很好的明确警告。</p>
+<p>这种设计的一个重要特点是，在没有警告的情况下在文件中执行的任何代码在新的 REPL 中的行为方式相同。 另一方面，如果您使用 REPL 会话并将其保存到文件中，如果它的行为与 REPL 中的行为不同，那么您将收到警告。</p>
+<h3 id="let">Let 块<a class="headerlink" href="#let" title="Permanent link">¶</a></h3>
+<p><code class="highlight">let</code> 语句创建一个新的 <em>硬作用域</em> 块（见上文）并在每次运行时引入新的变量绑定。 赋值可能会为现有值地址重新分配一个新值，而 <code class="highlight">let</code> 总是会创建一个新地址。 这种差异通常并不重要，并且只有在通过闭包超出其作用域的变量的情况下才能检测到。 <code class="highlight">let</code> 语法接受以逗号分隔的一系列赋值和变量名：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">z</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">           </span><span class="n">println</span><span class="p">(</span><span class="s">"x: </span><span class="si">$x</span><span class="s">, y: </span><span class="si">$y</span><span class="s">"</span><span class="p">)</span><span class="w"> </span><span class="c"># x is local variable, y the global</span>
+<a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">           </span><span class="n">println</span><span class="p">(</span><span class="s">"z: </span><span class="si">$z</span><span class="s">"</span><span class="p">)</span><span class="w"> </span><span class="c"># errors as z has not been assigned yet but is local</span>
+<a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="go">x: 1, y: -1</span>
+<a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="gr">ERROR: UndefVarError: z not defined</span>
+</code></pre></div>
+<p>赋值将按次序执行：作用域右侧先于左侧引入新变量前被执行。这使得类似 <code class="highlight">let x = x</code> 的写法是有意义的，因为这两个 <code class="highlight">x</code> 变量并不一样，拥有不同存储位置。<code class="highlight">let</code> 的行为在如下例子中是必要的：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Any</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">           </span><span class="n">Fs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="o">-&gt;</span><span class="n">i</span>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">           </span><span class="k">global</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a>
+<a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]()</span>
+<a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="go">3</span>
+<a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a>
+<a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="p">[</span><span class="mi">2</span><span class="p">]()</span>
+<a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="go">3</span>
+</code></pre></div>
+<p>在这里，我们创建并存储了两个返回变量 <code class="highlight">i</code> 的闭包。但是因为始终是同一个变量<code class="highlight">i</code>，所以这两个闭包行为是相同的。我们可以使用 <code class="highlight">let</code> 为 <code class="highlight">i</code> 创建新绑定：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Any</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">           </span><span class="k">let</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">               </span><span class="n">Fs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="o">-&gt;</span><span class="n">i</span>
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">           </span><span class="k">global</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a>
+<a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]()</span>
+<a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="go">1</span>
+<a href="#__codelineno-18-12" id="__codelineno-18-12" name="__codelineno-18-12"></a>
+<a href="#__codelineno-18-13" id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="p">[</span><span class="mi">2</span><span class="p">]()</span>
+<a href="#__codelineno-18-14" id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="go">2</span>
+</code></pre></div>
+<p>由于 <code class="highlight">begin</code> 结构不会引入新的作用域，使用零参数 <code class="highlight">let</code> 来引入一个新的作用域块而不立即创建任何新的绑定是很有用的：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">let</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">           </span><span class="k">local</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">           </span><span class="k">let</span>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">               </span><span class="k">local</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">           </span><span class="n">x</span>
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="go">1</span>
+</code></pre></div>
+<p>由于<code class="highlight">let</code> 引入了一个新的作用域块，内部局部变量<code class="highlight">x</code> 与外部局部变量<code class="highlight">x</code> 是一个不同的变量。这个特定的例子相当于：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">           </span><span class="k">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">           </span><span class="n">x</span>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="go">1</span>
+</code></pre></div>
+<h3 id="_6">循环和数组推导<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
+<p>对于循环和<a href="@ref man-comprehensions">数组推导</a>：在其内部作用域中引入的新变量在每次循环迭代中都会被新分配一块内存，如同被 <code class="highlight">let</code> 块包围。</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Any</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a>
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">           </span><span class="n">Fs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="o">-&gt;</span><span class="n">j</span>
+<a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">       </span><span class="k">end</span>
+<a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a>
+<a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]()</span>
+<a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="go">1</span>
+<a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a>
+<a href="#__codelineno-21-10" id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">Fs</span><span class="p">[</span><span class="mi">2</span><span class="p">]()</span>
+<a href="#__codelineno-21-11" id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="go">2</span>
+</code></pre></div>
+<p><code class="highlight"><span class="k">for</span></code> 循环或者推导式的迭代变量始终是个新变量：  </p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">           </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">           </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">               </span><span class="c"># empty</span>
+<a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">i</span>
+<a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-22-8" id="__codelineno-22-8" name="__codelineno-22-8"></a>
+<a href="#__codelineno-22-9" id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+<a href="#__codelineno-22-10" id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="go">0</span>
+</code></pre></div>
+<p>但是偶然地，把一个已有的局部变量作为迭代变量也是有用的。
+添加关键字 <code class="highlight">outer</code> 就能方便地做到：  </p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">           </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">           </span><span class="k">for</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">               </span><span class="c"># empty</span>
+<a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">           </span><span class="k">end</span>
+<a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">           </span><span class="k">return</span><span class="w"> </span><span class="n">i</span>
+<a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">       </span><span class="k">end</span><span class="p">;</span>
+<a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a>
+<a href="#__codelineno-23-9" id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+<a href="#__codelineno-23-10" id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="go">3</span>
+</code></pre></div>
+<h2 id="_7">常量<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
+<p>变量普遍地用于命名一个特定、不变的值。这些变量只被赋值一次。向编译器传递 <a href="@ref"><code class="highlight"><span class="k">const</span></code></a> 关键字，即可声明这个意图：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">e</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">2.71828182845904523536</span><span class="p">;</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159265358979323846</span><span class="p">;</span>
+</code></pre></div>
+<p>单个 <code class="highlight"><span class="k">const</span></code> 关键字能同时声明多个变量：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="go">(1, 2)</span>
+</code></pre></div></p>
+<p><code class="highlight"><span class="k">const</span></code> 声明只应使用在全局作用域中的全局变量。因为全局变量的值（甚至类型）可以随时改变，编译器很难优化包含全局变量的代码。而用 <code class="highlight"><span class="k">const</span></code> 声明一个不变的全局变量，就能处理这个问题。</p>
+<p>局部常量却大有不同。编译器能够自动确定一个局部变量什么时候是不变的，所以局部常量声明是不必要的，其实现在也并不支持。</p>
+<p>一些特殊的顶层赋值，比如用了 <code class="highlight"><span class="k">function</span></code> 和 <code class="highlight">structure</code> 关键字，默认就是常量。</p>
+<p>注意 <code class="highlight"><span class="k">const</span></code> 只会影响变量绑定；变量可能会绑定到一个可变的对象上（比如一个数组）使得其仍然能被改变。另外当尝试给一个声明为常量的变量赋值时，可能出现下列情景：</p>
+<ul>
+<li>如果新赋值的类型与原常量类型不一样，会扔出一个错误：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<a href="#__codelineno-26-2" id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="go">1.0</span>
+<a href="#__codelineno-26-3" id="__codelineno-26-3" name="__codelineno-26-3"></a>
+<a href="#__codelineno-26-4" id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-26-5" id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="gr">ERROR: invalid redefinition of constant x</span>
+</code></pre></div></li>
+<li>如果新赋值的类型与原常量一样，会打印一个警告：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="go">1.0</span>
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span>
+<a href="#__codelineno-27-5" id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="go">WARNING: redefinition of constant y. This may fail, cause incorrect answers, or produce other errors.</span>
+<a href="#__codelineno-27-6" id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="go">2.0</span>
+</code></pre></div></li>
+<li>如果赋值不导致原变量值变化，则不会给出任何信息：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="go">100</span>
+<a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a>
+<a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="go">100</span>
+</code></pre></div>
+最后一条规则也适用于不可变对象，即使变量绑定的地址改变了，例如：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1"</span>
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="go">"1"</span>
+<a href="#__codelineno-29-3" id="__codelineno-29-3" name="__codelineno-29-3"></a>
+<a href="#__codelineno-29-4" id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1"</span>
+<a href="#__codelineno-29-5" id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="go">"1"</span>
+<a href="#__codelineno-29-6" id="__codelineno-29-6" name="__codelineno-29-6"></a>
+<a href="#__codelineno-29-7" id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">pointer</span><span class="o">.</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-29-8" id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="go">2-element Array{Ptr{UInt8},1}:</span>
+<a href="#__codelineno-29-9" id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="go"> Ptr{UInt8} @0x00000000132c9638</span>
+<a href="#__codelineno-29-10" id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="go"> Ptr{UInt8} @0x0000000013dd3d18</span>
+<a href="#__codelineno-29-11" id="__codelineno-29-11" name="__codelineno-29-11"></a>
+<a href="#__codelineno-29-12" id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s2</span>
+<a href="#__codelineno-29-13" id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="go">"1"</span>
+<a href="#__codelineno-29-14" id="__codelineno-29-14" name="__codelineno-29-14"></a>
+<a href="#__codelineno-29-15" id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">pointer</span><span class="o">.</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-29-16" id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="go">2-element Array{Ptr{UInt8},1}:</span>
+<a href="#__codelineno-29-17" id="__codelineno-29-17" name="__codelineno-29-17"></a><span class="go"> Ptr{UInt8} @0x0000000013dd3d18</span>
+<a href="#__codelineno-29-18" id="__codelineno-29-18" name="__codelineno-29-18"></a><span class="go"> Ptr{UInt8} @0x0000000013dd3d18</span>
+</code></pre></div>
+然而对于可变对象，警告会如预期出现：
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a href="#__codelineno-30-2" id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="go">1-element Vector{Int64}:</span>
+<a href="#__codelineno-30-3" id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go"> 1</span>
+<a href="#__codelineno-30-4" id="__codelineno-30-4" name="__codelineno-30-4"></a>
+<a href="#__codelineno-30-5" id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a href="#__codelineno-30-6" id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="go">WARNING: redefinition of constant a. This may fail, cause incorrect answers, or produce other errors.</span>
+<a href="#__codelineno-30-7" id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="go">1-element Vector{Int64}:</span>
+<a href="#__codelineno-30-8" id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="go"> 1</span>
+</code></pre></div></li>
+</ul>
+<p>注意，虽然有时是可能更改常量的值，但是十分不推荐这样做。这样做仅仅是为了便于交互式使用。更改常量可引发多种问题或者非预期行为。举个例子，如果一个方法引用了一个常量并且在常量被更改前已经被编译了，那么该函数很有可能继续使用旧值：</p>
+<div class="highlight"><span class="filename">Julia-REPL</span><pre><span></span><code><a href="#__codelineno-31-1" id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a href="#__codelineno-31-2" id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="go">1</span>
+<a href="#__codelineno-31-3" id="__codelineno-31-3" name="__codelineno-31-3"></a>
+<a href="#__codelineno-31-4" id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<a href="#__codelineno-31-5" id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="go">f (generic function with 1 method)</span>
+<a href="#__codelineno-31-6" id="__codelineno-31-6" name="__codelineno-31-6"></a>
+<a href="#__codelineno-31-7" id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+<a href="#__codelineno-31-8" id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="go">1</span>
+<a href="#__codelineno-31-9" id="__codelineno-31-9" name="__codelineno-31-9"></a>
+<a href="#__codelineno-31-10" id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a href="#__codelineno-31-11" id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="go">WARNING: redefinition of constant x. This may fail, cause incorrect answers, or produce other errors.</span>
+<a href="#__codelineno-31-12" id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="go">2</span>
+<a href="#__codelineno-31-13" id="__codelineno-31-13" name="__codelineno-31-13"></a>
+<a href="#__codelineno-31-14" id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+<a href="#__codelineno-31-15" id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="go">1</span>
+</code></pre></div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 Dr. Li Haifeng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.linktheme", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+<script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+<script src="../../javascripts/mathjaxCFG.js"></script>
+<script src="../../MathJax/tex-chtml.js"></script>
+<script src="../../javascripts/refresh_on_toggle_dark_light.js"></script>
+<script src="../../javascripts/highlight.min.js"></script>
+<script src="../../javascripts/mermaid.min.js"></script>
+<script src="../../javascripts/wavedrom_unpkg.js"></script>
+<script src="../../javascripts/wavedrom_skin_default.js"></script>
+</body>
+</html>

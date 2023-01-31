@@ -1,0 +1,9 @@
+        - name: jldoctest
+          class: Highlight
+          format: !!python/name:pymdownx.highlight.BlockHtmlFormatter
+above is bad!
+
+below is worked!
+
+      extend_pygments_lang: [{"name": "jldoctest",  "lang": "julia-repl", "options": {"startinline": True}}, 
+                             {"name": "php-inline", "lang": "php", "options": {"startinline": True}}]

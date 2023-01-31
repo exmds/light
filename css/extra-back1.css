@@ -1,0 +1,20 @@
+.medium {
+  color: #00AB6C;
+}
+.twitter {
+  color: #1DA1F2;
+}
+.facebook {
+  color: #4267B2;
+}
+.google {
+  color: #FC5531;
+}
+.highlight .gp {
+  color: #1F71B1;
+}
+:root > * {
+  --md-code-hl-function-color: #444444;
+  --md-code-font-family: Fira Code;
+
+}

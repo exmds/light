@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://www.drlx.com/stability/2022/" rel="canonical"/>
+<link href="../.." rel="prev"/>
+<link href="../GBT40615/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.7" name="generator"/>
+<title>建苏直流 - Deep Reinforcement Learning</title>
+<link href="../../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../css/extra.css" rel="stylesheet"/>
+<link href="../../css/hint.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="light-blue" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#_1">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="Deep Reinforcement Learning" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Deep Reinforcement Learning
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              建苏直流
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+      Home
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="./">
+        专题分析
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../eec/">
+      EEC
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../math-model/">
+        PowerModule
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../manual/getting-started/">
+        Julia
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../markdown/figure/">
+        Help
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../about/">
+      About
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Deep Reinforcement Learning" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Deep Reinforcement Learning
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          专题分析
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          专题分析
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          建苏直流
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        建苏直流
+      </a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    多馈入直流短路比
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GBT40615/">
+        电力系统电压稳定评价导则
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../eec/">
+        EEC
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          PowerModule
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          PowerModule
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../math-model/">
+        The PowerModels Mathematical Model
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Julia
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Julia
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../manual/getting-started/">
+        入门
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../manual/variables/">
+        变量
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../manual/variables-and-scoping/">
+        变量作用域
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../manual/functions/">
+        函数
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../manual/unicode-input/">
+        Unicode输入表
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Help
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Help
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/figure/">
+        增加图表
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/common/">
+        常用扩展
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../markdown/txtbar/">
+        进度条
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../about/">
+        About
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="_1">建苏直流<a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
+<p><strong>工程概况</strong>：白鹤滩-江苏特高压直流输电距离<font color="red">2087公里</font>，直流额定电压<font color="red"><span class="arithmatex">\(\pm800\)</span>kV</font>，额定功率<font color="red"><span class="arithmatex">\(800\)</span>万千瓦</font>，调度命名 <strong>建苏直流</strong> 。受端首次采用高端LCC（常规直流）+低端三个VSC （柔性直流）混合级联方案，LCC和VSC合站建设。<mark>计划2022年6月投运送端双低、受端 LCC，12月全部投运</mark>。  </p>
+<p><strong>接入系统</strong>：送端建昌换流站<span class="arithmatex">\(\pi\)</span>入后，通过至月城双回线、至橄榄单回线与系统相连，白鹤滩左岸电厂通过4回线与换流站相连。受端高端LCC经双回出线至斗山、3回出 线至常熟南；低端VSC1<span class="arithmatex">\(\pi\)</span>入张家港-常熟北单回线，VSC2经双回线接入木渎，VSC3经双回线接入玉山；其中，VSC2、VSC3落点苏州南部电网内部。
+<center>
+<img alt="" src="../pics/19.svg"/>
+<br/>
+<span style="padding:2px"><b>建苏直流送端接入系统方案</b></span>
+</center></p>
+<div class="admonition example">
+<p class="admonition-title">受端特性</p>
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7Z"></path></svg></span>  2022年中，建苏直流两个换流器建成投运。姑苏换流站经斗山向苏州南部电网供电，缓解特高压东吴主变下网潮流，<mark>苏州南部电网交流受电能力可提升约100万千瓦</mark>；<br/>
+<span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41L18 7Z"></path></svg></span>  2022年底，建苏直流四个换流器全部投运。姑苏换流站经四回线接入苏州南部电网，<mark>增加直流受电能力约250万千瓦</mark>。</p>
+<div class="admonition tip">
+<p class="admonition-title">主要结论及关注重点</p>
+<ul>
+<li>为控制石牌、车坊、木渎、玉山四个站点的短路电流不超过63kA，<font color="red">苏南电网需采取4出串方式，同时，短路电流水平的控制与VSC的短路电流控制方式（VDCOL）相关。</font></li>
+<li><font color="red">换流站投切一组滤波器，稳态电压波动将超过<span class="arithmatex">\(1\%\)</span>。</font> </li>
+<li><ins class="critic">木渎采用定电压控制可进一步缩小引起建苏直流、锦苏直流换相失败的交流故障范围,效果也最为明显。该控制方式下，木渎-梅里N-2故障锦苏直流仅发生1次换相失败</ins>。  </li>
+<li>逆变侧仅高端LCC投运，建苏直流功率为400万千瓦，发生双极2次全压重启动成功或2全1降重启动成功，系统均稳定。  </li>
+<li>建苏直流双极闭锁后（建苏满功率<ins class="critic">年中400万，年底800万</ins>、锦苏720万，无措施），系统稳定，苏南地区厂站母线电压均可恢复至0.9p.u.以上。</li>
+<li><font color="red">直流馈入规模增大，汛低时段多馈入短路比不足。</font> </li>
+<li>锦苏、建苏直流满功率送电时需安排本地煤机、燃机大开机方式。<br/>
+<img alt="☀" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/2600.svg" title=":sunny:"/> <ins class="critic">夏季高峰时段</ins>——苏州南部电网开机方式基本可满足锦苏、建苏直流同时大功率送电需求；<br/>
+<span class="twemoji"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M128 320c-53 0-96-43-96-96 0-42.5 27.6-78.6 65.9-91.2-1.2-6.7-1.9-13.7-1.9-20.8C96 50.1 146.1 0 208 0c43.1 0 80.5 24.3 99.2 60 14.7-17.1 36.5-28 60.8-28 44.2 0 80 35.8 80 80 0 5.5-.6 10.8-1.6 16h1.6c53 0 96 43 96 96s-43 96-96 96H128zm-14.5 33.9c12.2 5.2 17.8 19.3 12.6 31.5l-48 112c-5.2 12.2-19.3 17.8-31.5 12.6S28.8 490.7 34 478.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6zm120 0c12.2 5.2 17.8 19.3 12.6 31.5l-48 112c-5.2 12.2-19.3 17.8-31.5 12.6s-17.8-19.3-12.6-31.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6zm244.6 31.5-48 112c-5.2 12.2-19.3 17.8-31.5 12.6s-17.8-19.3-12.6-31.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6s17.8 19.3 12.6 31.5zm-132.6-31.5c12.2 5.2 17.8 19.3 12.6 31.5l-48 112c-5.2 12.2-19.3 17.8-31.5 12.6s-17.8-19.3-12.6-31.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6z"></path></svg></span> <ins class="critic">汛期低谷时段</ins>——多馈入短路比不足，需统筹安排直流送电水平和苏南开机方式。</li>
+<li><font color="red">斗山-LCC双线N-2对网架削弱最为严重，该方式下交流系统对LCC支撑极弱。</font> </li>
+</ul>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><input id="__tabbed_1_2" name="__tabbed_1" type="radio"/><input id="__tabbed_1_3" name="__tabbed_1" type="radio"/><input id="__tabbed_1_4" name="__tabbed_1" type="radio"/><input id="__tabbed_1_5" name="__tabbed_1" type="radio"/><input id="__tabbed_1_6" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">接入方案</label><label for="__tabbed_1_2">短路电流水平</label><label for="__tabbed_1_3">投切滤波器的电压波动</label><label for="__tabbed_1_4">换相失败特性分析</label><label for="__tabbed_1_5">多馈入短路比</label><label for="__tabbed_1_6">斗山-姑苏换三永N-2故障<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>高端</strong>：LCC双<span class="arithmatex">\(\pi\)</span>接入斗山～常熟南2回500kV线路，新建1回LCC至常熟南线路；<br/>
+<strong>低端</strong>：VSC1单<span class="arithmatex">\(\pi\)</span>接入张家港～常熟北单线；VSC2、VSC3各新建2回500kV线路至木渎、玉山变电站；<br/>
+           VSC2和VSC3的交流母线间暂按加装分段开关考虑，VSC1和VSC2间按预留加装分段开关位置考虑；苏州地区网架4出串<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。
+  <center>
+<img alt="" src="../pics/18.svg" width="1024"/>
+<br/>
+<span style="padding:2px"><b>建苏直流受端接入系统方案</b></span>
+</center> </p>
+</div>
+<div class="tabbed-block">
+<p><strong>夏高方式下</strong>：石牌、车坊、木渎、玉山四个站点的短路电流均未超过63kA；<br/>
+<strong>冬高方式下</strong>：逆变侧低端3个VSC的接入会导致苏南地区短路电流水平升高，采取4出串的短路电流控制措施后，三相短路电流和单相短路电流均不超标<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>。<br>
+<img alt="" src="../pics/c19.svg" width="1024"/><br/>
+<strong>冬低方式下</strong>：考虑苏州地区4出串的短路电流控制措施，江苏无旋备<br/>
+<span class="twemoji medium"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"></path></svg></span>  - 全接线方式下逆变侧高端LCC短路电流水平高于34kA；<br/>
+<img alt="💡" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f4a1.svg" title=":bulb:"/>                                - 全接线及多数检修方式下LCC多馈入有效短路比大于2.5，斗山-LCC发生N-2后交流系统对LCC支撑极弱；<br/>
+  :fontawesome-solid-burn:{.burn}       - <strong>斗山-LCC双线N-2对网架削弱最为严重</strong>。<br/>
+<img alt="" src="../pics/c20.svg" width="1024"/> </br></p>
+</div>
+<div class="tabbed-block">
+<p>夏低与冬低方式下，考虑苏州地区的短路电流控制措施，江苏无旋备，换流站投切一组滤波器，<mark>稳态电压波动将超过<span class="arithmatex">\(1\%\)</span></mark>。<br/>
+<img alt="" src="../pics/c21.svg" width="1024"/> </p>
+</div>
+<div class="tabbed-block">
+<p>A. <strong>受端换相失败特点</strong></p>
+<ul>
+<li><strong>VSC提供了稳定的动态无功支撑，有助于建苏直流、锦苏直流换相失败后苏南地区电压恢复</strong>：<br/>
+   (1)  <mark>VSC投运前</mark> 20个交流N-1、N-2故障可引起锦苏直流发生3次换相失败；<br/>
+   (2)  <mark>VSC接入后</mark> 锦苏最多换相失败次数降低为2次，且引起2次换相失败的故障数也有所减少。  </li>
+<li><strong>VSC常用定电压或定无功方式控制可进一步缩小引起建苏直流、锦苏直流换相失败的交流故障范围</strong>：<br/>
+   (1)  若木渎或玉山站VSC站采用定电压控制，可进一步缩小可引起建苏、锦苏换相失败的交流故障的范围；<br/>
+   (2)  定无功交换控制方式对此改善不大；<br/>
+   (3)  <ins class="critic">木渎采用定电压控制的效果最为明显，该控制方式下，木渎-梅里N-2故障锦苏直流仅发生1次换相失败</ins>。  </li>
+</ul>
+<p><img alt="" src="../pics/c22.svg" width="1024"/> </p>
+<p>B. <strong>直流重启动（无VSC）</strong></p>
+<p>逆变侧仅高端LCC投运，建苏直流功率为400万千瓦，发生双极2次全压重启动成功或2全1降重启动成功，系统均稳定。<br/>
+<img alt="" src="../pics/zlbs.png" width="1024"/> </p>
+<p>C. <strong>直流双极闭锁</strong><br/>
+<strong>夏低方式下</strong>：建苏直流双极闭锁后（建苏<ins class="critic">400万</ins>、锦苏720万，无措施），系统稳定，苏南地区厂站母线电压均可恢复至0.9p.u.以上。
+VSC换流单元双极闭锁，直流可稳定运行，换流站近区交流母线电压可恢复至0.9p.u.以上。<br/>
+<strong>冬低方式下</strong>：建苏直流双极闭锁后（建苏<ins class="critic">800万</ins>、锦苏720万，无措施），系统稳定，苏南地区厂站母线电压均可恢复至0.9p.u.以上。<br/>
+<img alt="" src="../pics/c24.svg" width="1024"/> </p>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>直流馈入规模增大，汛低时段多馈入短路比不足。  </li>
+<li>锦苏、建苏直流满功率送电时需安排本地煤机、燃机大开机方式。<br/>
+<img alt="☀" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/2600.svg" title=":sunny:"/> <ins class="critic">夏季高峰时段</ins>——苏州南部电网开机方式基本可满足锦苏、建苏直流同时大功率送电需求；<br/>
+<span class="twemoji"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M128 320c-53 0-96-43-96-96 0-42.5 27.6-78.6 65.9-91.2-1.2-6.7-1.9-13.7-1.9-20.8C96 50.1 146.1 0 208 0c43.1 0 80.5 24.3 99.2 60 14.7-17.1 36.5-28 60.8-28 44.2 0 80 35.8 80 80 0 5.5-.6 10.8-1.6 16h1.6c53 0 96 43 96 96s-43 96-96 96H128zm-14.5 33.9c12.2 5.2 17.8 19.3 12.6 31.5l-48 112c-5.2 12.2-19.3 17.8-31.5 12.6S28.8 490.7 34 478.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6zm120 0c12.2 5.2 17.8 19.3 12.6 31.5l-48 112c-5.2 12.2-19.3 17.8-31.5 12.6s-17.8-19.3-12.6-31.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6zm244.6 31.5-48 112c-5.2 12.2-19.3 17.8-31.5 12.6s-17.8-19.3-12.6-31.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6s17.8 19.3 12.6 31.5zm-132.6-31.5c12.2 5.2 17.8 19.3 12.6 31.5l-48 112c-5.2 12.2-19.3 17.8-31.5 12.6s-17.8-19.3-12.6-31.5l48-112c5.2-12.2 19.3-17.8 31.5-12.6z"></path></svg></span> <ins class="critic">汛期低谷时段</ins>——多馈入短路比不足，需统筹安排直流送电水平和苏南开机方式。  </li>
+</ul>
+<p><img alt="" src="../pics/c4.png"/> </p>
+</div>
+<div class="tabbed-block">
+<p>A. <strong>低电压问题</strong></p>
+<ul>
+<li>冬低方式下，考虑苏州地区4出串的短路电流控制措施、江苏无旋备，全接线方式下发生斗山-姑苏换三永N-2故障，换流母线稳态电压会低于490kV（483kV）；  </li>
+<li>采取闭锁高端单极LCC的安控措施后，稳态电压均可恢复490kV以上。  </li>
+<li>木渎/玉山以定电压方式运行有利于母线的电压恢复。<br/>
+<img alt="" src="../pics/c25.svg" width="1024"/> </li>
+</ul>
+<p>B. <strong>直流稳定运行问题</strong></p>
+<p>采用ADPSS混合仿真验证，全接线发生斗山-姑苏换三永N-2故障，直流可稳定运行，逆变侧高端LCC换流母线电压恢复至0.920p.u.（483.1kV）。<br/>
+<img alt="" src="../pics/c26.svg" width="1024"/> </p>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">送端特性</p>
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7Z"></path></svg></span>      2022年中，建苏直流两个换流器建成投运。<mark>白鹤滩左岸需开2机以上，直流最大能力 <strong>400万千瓦</strong></mark>；<br/>
+<span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41L18 7Z"></path></svg></span>  2022年底，建苏直流四个换流器全部投运。<mark>白鹤滩左岸需开7机以上，直流最大能力 <strong>800万千瓦</strong></mark>（直流故障后换流站暂态过电压约束）。</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:8"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"/><input id="__tabbed_2_2" name="__tabbed_2" type="radio"/><input id="__tabbed_2_3" name="__tabbed_2" type="radio"/><input id="__tabbed_2_4" name="__tabbed_2" type="radio"/><input id="__tabbed_2_5" name="__tabbed_2" type="radio"><input id="__tabbed_2_6" name="__tabbed_2" type="radio"><input id="__tabbed_2_7" name="__tabbed_2" type="radio"><input id="__tabbed_2_8" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">接入方案</label><label for="__tabbed_2_2">潮流组织能力</label><label for="__tabbed_2_3">短路电流水平</label><label for="__tabbed_2_4">投切滤波器的电压波动</label><label for="__tabbed_2_5"><mark class="critic"><strong>暂态压升</strong></mark></label><label for="__tabbed_2_6">稳态压升</label><label for="__tabbed_2_7">频率特性</label><label for="__tabbed_2_8">换相失败特性分析</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>2022年6月，建苏直流工程投产以后，形成2回接入月城，1回接入橄榄，4回接入白鹤滩左岸电站的方案，白鹤滩右岸电站仍以2回线路接入普提变。
+  <center>
+<img alt="" src="../pics/8.svg"/>
+<br/>
+<span style="padding:2px"><b>建苏直流送端接入系统方案</b></span>
+</center></p>
+</div>
+<div class="tabbed-block">
+<p>受换流站近区线路N-1后的线路热稳约束，全接线方式下，建昌换最多可从西南电网组织 <mark>300万千瓦</mark> 电力。</p>
+<table>
+<thead>
+<tr>
+<th><strong>方式</strong></th>
+<th><strong>制约故障</strong></th>
+<th><strong>热稳制约（万千瓦）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全接线</td>
+<td>榄普N-1后建榄过热稳</td>
+<td>300</td>
+</tr>
+<tr>
+<td>建月N-1检修</td>
+<td>建月N-1后建榄过热稳</td>
+<td>190</td>
+</tr>
+<tr>
+<td>建榄N-1检修</td>
+<td>建月N-1后剩余一回线过热稳</td>
+<td>250</td>
+</tr>
+</tbody>
+</table>
+<p><img align="align" alt="" right="right" src="../pics/cl.svg"/></p>
+</div>
+<div class="tabbed-block">
+<p>建昌换500kV侧交流母线短路电流水平大于成套设计中最小短路电流20.0kA的要求。</p>
+<table>
+<thead>
+<tr>
+<th><strong>方式</strong></th>
+<th><strong>直流功率（万千瓦）</strong></th>
+<th><strong>白鹤滩左岸开机（台）</strong></th>
+<th><strong>短路电流（kA）</strong></th>
+<th><strong>短路容量（MVA）</strong></th>
+<th><strong>短路比</strong></th>
+<th><strong>滤波器容量（MVar）</strong></th>
+<th><strong>有效短路比</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全接线</td>
+<td>800</td>
+<td>4</td>
+<td>29.79</td>
+<td>25275</td>
+<td>3.16</td>
+<td>4345</td>
+<td>2.62</td>
+</tr>
+<tr>
+<td>全接线</td>
+<td>780</td>
+<td>4</td>
+<td>27.66</td>
+<td>25156</td>
+<td>3.23</td>
+<td>4345</td>
+<td>2.67</td>
+</tr>
+<tr>
+<td>建月任一线检修</td>
+<td>590</td>
+<td>4</td>
+<td>23.30</td>
+<td>21186</td>
+<td>3.59</td>
+<td>2780</td>
+<td>3.12</td>
+</tr>
+<tr>
+<td>建月任一线检修</td>
+<td>790</td>
+<td>6</td>
+<td>27.48</td>
+<td>24989</td>
+<td>3.16</td>
+<td>4345</td>
+<td>2.61</td>
+</tr>
+<tr>
+<td>建榄任一线检修</td>
+<td>650</td>
+<td>4</td>
+<td>23.11</td>
+<td>21010</td>
+<td>3.23</td>
+<td>2780</td>
+<td>2.75</td>
+</tr>
+<tr>
+<td>建月任一线检修</td>
+<td>800</td>
+<td>6</td>
+<td>27.24</td>
+<td>24773</td>
+<td>3.10</td>
+<td>4345</td>
+<td>2.55</td>
+</tr>
+<tr>
+<td>建月双线停</td>
+<td>780</td>
+<td>6</td>
+<td><span aria-label="18898 / (1.732*525)" class="tooltip hint--top hint--info hint--bounce">20.78</span></td>
+<td>18898</td>
+<td><span aria-label="(18898 - 0) / 7800" class="tooltip hint--top hint--info hint--bounce">2.42</span></td>
+<td>4345</td>
+<td><span aria-label="(18898 - 4345) / 7800" class="tooltip hint--top hint--info hint--bounce">1.87</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>建昌换切除1小组滤波器后，<span class="arithmatex">\(500\mathrm{kV}\)</span> 交流母线电压波动不超过 <span class="arithmatex">\(1\%\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th><div align="center">方式</div></th>
+<th align="center"><div align="center">直流功率<br/>（万千瓦）</div></th>
+<th align="center"><div align="center">白鹤滩左岸开机<br/>（台）</div></th>
+<th align="center"><div align="center">初始电压<br/>（kV）</div></th>
+<th align="center"><div align="center">稳态电压<br/>（kV）</div></th>
+<th align="center"><div align="center">电压变化<br/>（kV）</div></th>
+<th align="center"><div align="center">电压变化率<br/>（<span class="arithmatex">\(\%\)</span>）</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全接线</td>
+<td align="center">800</td>
+<td align="center">4</td>
+<td align="center">524.4</td>
+<td align="center">520.1</td>
+<td align="center">4.3</td>
+<td align="center">0.82</td>
+</tr>
+<tr>
+<td>全接线</td>
+<td align="center">780</td>
+<td align="center">4</td>
+<td align="center">529.0</td>
+<td align="center">524.7</td>
+<td align="center">4.3</td>
+<td align="center">0.81</td>
+</tr>
+<tr>
+<td>建月任一线检修</td>
+<td align="center">590</td>
+<td align="center">4</td>
+<td align="center">528.8</td>
+<td align="center">525.9</td>
+<td align="center">2.9</td>
+<td align="center">0.55</td>
+</tr>
+<tr>
+<td>建月任一线检修</td>
+<td align="center">790</td>
+<td align="center">6</td>
+<td align="center">529.7</td>
+<td align="center">525.4</td>
+<td align="center">4.3</td>
+<td align="center">0.82</td>
+</tr>
+<tr>
+<td>建榄任一线检修</td>
+<td align="center">650</td>
+<td align="center">4</td>
+<td align="center">527.4</td>
+<td align="center">523.4</td>
+<td align="center">4.0</td>
+<td align="center">0.76</td>
+</tr>
+<tr>
+<td>建榄任一线检修</td>
+<td align="center">800</td>
+<td align="center">6</td>
+<td align="center">525.7</td>
+<td align="center">521.6</td>
+<td align="center">4.1</td>
+<td align="center">0.78</td>
+</tr>
+<tr>
+<td>建月双线停</td>
+<td align="center">780</td>
+<td align="center">6</td>
+<td align="center">531.0</td>
+<td align="center">526.4</td>
+<td align="center">4.6</td>
+<td align="center">0.87</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>全接线方式下，考虑配套电源不同开机水平，以换流母线电压耐压能力基准值为550kV约束，当配套电源开机不少于6机时，直流具备满送条件。  </p>
+<table>
+<thead>
+<tr>
+<th><strong>白鹤滩左岸开机（台）</strong></th>
+<th><strong>直流输电能力（万千瓦）</strong></th>
+<th><strong>暂态压升（p.u.）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>600</strong></td>
+<td><strong>0.306</strong></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>670</strong></td>
+<td><strong>0.311</strong></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>730</strong></td>
+<td><strong>0.313</strong></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>770</strong></td>
+<td><strong>0.312</strong></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>800</strong></td>
+<td><strong>0.297</strong></td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><strong>800</strong></td>
+<td><strong>0.274</strong></td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><strong>800</strong></td>
+<td><strong>0.259</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>成套设计中建昌换的无功控制策略暂不明确。考虑不同开机水平下 <strong>建月+建榄断面送建昌功率</strong> <span class="arithmatex">\(\leqslant300\)</span>万千瓦，直流闭锁后的稳态压升最大值为16.6kV，闭锁后的稳态压升对直流输电能力不构成约束。  </p>
+<table>
+<thead>
+<tr>
+<th>白鹤滩左开机（台）</th>
+<th>直流功率（万千瓦）</th>
+<th>无功交换值（Mvar）</th>
+<th>切机量万千瓦）</th>
+<th>换流母线初始电压（kV）</th>
+<th>换流母线稳态电压（kV）</th>
+<th>稳态压升（kV）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>500</td>
+<td>374</td>
+<td>500</td>
+<td>513.7</td>
+<td>527.8</td>
+<td>14.1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>600</td>
+<td>503</td>
+<td>600</td>
+<td>513.8</td>
+<td>528.3</td>
+<td>14.5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>700</td>
+<td>624</td>
+<td>700</td>
+<td>514.1</td>
+<td>529.1</td>
+<td>15.8</td>
+</tr>
+<tr>
+<td>5</td>
+<td>800</td>
+<td>681</td>
+<td>800</td>
+<td>515.1</td>
+<td>531.7</td>
+<td>16.6</td>
+</tr>
+<tr>
+<td>6</td>
+<td>800</td>
+<td>681</td>
+<td>800</td>
+<td>515.1</td>
+<td>529.5</td>
+<td>14.4</td>
+</tr>
+<tr>
+<td>7</td>
+<td>800</td>
+<td>684</td>
+<td>800</td>
+<td>514.8</td>
+<td>528.0</td>
+<td>13.2</td>
+</tr>
+<tr>
+<td>8</td>
+<td>800</td>
+<td>689</td>
+<td>800</td>
+<td>514.6</td>
+<td>525.4</td>
+<td>10.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tabbed-block">
+<p>建苏直流800万千瓦，考虑闭锁双极后欠切60万的不平衡量，不同直流故障后西南电网频率计算结果如下表所示:<br/>
+<img alt="" src="../pics/13.svg" width="1024"/><br/>
+若考虑双极3次重启动失败，最高频率将超过50.8Hz，但持续时间未超西南电网第三道防线高周特殊动作轮的500ms。<br/>
+建苏直流重启动策略的特殊之处在于VSC不具备降压重启动能力，因此2次全压重启动失败后闭锁故障极逆变侧低端VSC，故障极剩余LCC进行第3次重启动。  </p>
+<div class="admonition abstract">
+<p class="admonition-title">频率特性分析结论</p>
+<p>考虑建苏直流800万千瓦、闭锁双极后欠切60万千瓦，3次重启动失败后西南电网最高频率将超过50.8Hz，但持续时间<span class="arithmatex">\(\leqslant500\mathrm{ms}\)</span>，不会触发西南电网第三道防线高周特殊动作，频率对直流输电能力不构成约束。</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p>A. <strong>直流换相失败特点</strong></p>
+<ul>
+<li>在直流换相失败方面，由于逆变侧直流电压可保持一定水平，整流侧直流电压始终不过零，直流电流大于零，且直流功率始终大于零，换相失败期间西南电网功率盈余少，引起的频率波动较小；</li>
+<li>换相失败及闭锁后，西南电网频率仍不超过50.8Hz；  </li>
+<li><strong>白鹤滩左岸开6机的情况下，建苏直流可承受4次换相失败后闭锁，暂态过电压仍是主要约束。</strong><br/>
+<img alt="" src="../pics/14.svg" width="1100"/><br/>
+以下，将进一步校核多回直流换相失败对送端的影响。</li>
+</ul>
+<p>B. <strong>建苏、锦苏同时换相失败</strong></p>
+<p>在夏低建苏直流功率800万、三大直流满送的方式下:</p>
+<ul>
+<li>建苏直流、锦苏直流发生同时连续5次换相失败后，西南各发电机组频率均未越限；</li>
+<li>建苏直流、锦苏直流发生同时连续6次换相失败后，向家坝、溪洛渡的机组频率最大值超过50.80<span class="arithmatex">\(\mathrm{Hz}\)</span>，但持续时间未超 <mark>500 <span class="arithmatex">\(\mathrm{ms}\)</span></mark>。
+<!--<img alt="" src="pics/15.svg" />{width="900"}--></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>向家坝</strong></th>
+<th><strong>白鹤滩左</strong></th>
+<th><strong>白鹤滩右</strong></th>
+<th><strong>锦东</strong></th>
+<th><strong>锦西</strong></th>
+<th><strong>官地</strong></th>
+<th><strong>溪洛渡左</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>同时连续5次换相失败（Hz）</strong></td>
+<td><strong>50.72</strong></td>
+<td><strong>50.67</strong></td>
+<td><strong>50.57</strong></td>
+<td><strong>50.58</strong></td>
+<td><strong>50.61</strong></td>
+<td><strong>50.55</strong></td>
+<td><strong>50.73</strong></td>
+</tr>
+<tr>
+<td><strong>同时连续6次换相失败（Hz）</strong></td>
+<td><strong>50.81/90ms</strong></td>
+<td><strong>50.71</strong></td>
+<td><strong>50.61</strong></td>
+<td><strong>50.67</strong></td>
+<td><strong>50.71</strong></td>
+<td><strong>50.64</strong></td>
+<td><strong>50.81/40ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p><center>
+<img alt="同时连续5次换相失败西南机组频率" src="../pics/hxsb5.png" width="600"/>
+<br/>
+<span style="padding:2px"><b>建苏直流、锦苏直流同时连续5次换相失败西南机组频率</b></span>
+<br/>
+<img alt="同时连续6次换相失败西南机组频率" src="../pics/hxsb6.png" width="600"/>
+<br/>
+<span><b>建苏直流、锦苏直流同时连续6次换相失败西南机组频率</b></span>
+</center></p>
+<p>C. <strong>建苏、锦苏、宾金、复奉相继换相失败</strong><br/>
+若在相同方式下(夏低方式，建苏800万、三大直流满送)，考虑4回直流在1.0s时刻同时发生第1次换相失败，在1.3s后发生第2次换相失败。<br/>
+故障后，<mark>4回直流配套电源最大频率为<span class="arithmatex">\(50.84\mathrm{Hz}\)</span>，持续时间未超<span class="arithmatex">\(500\mathrm{ms}\)</span></mark>。</p>
+<table>
+<thead>
+<tr>
+<th><strong>机组</strong></th>
+<th><strong>向家坝</strong></th>
+<th><strong>白鹤滩左</strong></th>
+<th><strong>白鹤滩右</strong></th>
+<th><strong>锦东</strong></th>
+<th><strong>官地</strong></th>
+<th><strong>溪洛渡左</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>最高频率（Hz）</strong></td>
+<td><strong>50.82/110ms</strong></td>
+<td><strong>50.51</strong></td>
+<td><strong>50.60</strong></td>
+<td><strong>50.56</strong></td>
+<td><strong>50.54</strong></td>
+<td><strong>50.84/190ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p><center>
+<img alt="同时连续5次换相失败西南机组频率" src="../pics/4hzl.png" width="600"/>
+<br/>
+<span style="padding:2px"><b>4回直流相继2次换相失败西南电网频率</b></span>
+</center></p>
+</div>
+</div>
+</input></input></input></input></div>
+</div>
+<p>区域负荷有功功率/无功功率裕度 <span class="arithmatex">\(K_{vp}，K_{vq}\)</span> 定义为：</p>
+<div class="arithmatex">\[\begin{align}
+K_{vp} &amp;= \frac{P_{max} - P}{P}\times 100\% \\
+K_{vq} &amp;= \frac{Q_{max} - Q}{Q}\times 100\%
+\end{align}\]</div>
+<p>式中：<span class="arithmatex">\(P_{max},P,\,Q_{max},Q\)</span> 分别表示临界运行点/初始运行点的有功/无功功率值；  </p>
+<ul>
+<li>
+<p>在区域最大负荷或最大断面潮流下:</p>
+<ol>
+<li>正常运行或检修方式下：<span class="arithmatex">\(K_{vp}\gt8\%,K_{vq}\gt8\%\)</span> </li>
+<li><span class="arithmatex">\(N—1\)</span> 故障后 <span class="arithmatex">\(K_{vp}\gt5\%,K_{vq}\gt5\%\)</span> </li>
+</ol>
+</li>
+<li>
+<p>受电比例较高的地区应适当调高负荷有功功率裕度</p>
+</li>
+</ul>
+<h2 id="_2">多馈入直流短路比<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<p>通过定义多馈入影响因子 <span class="arithmatex">\(MIIF\)</span> ，用以描述多馈入交直流系统的直流子系统间相互作用的强弱，据此得到 <mark><strong>多馈入直流短路比</strong></mark> <span class="arithmatex">\(MISCR\)</span> 的计算方法为：</p>
+<div class="arithmatex">\[\begin{equation} 
+\operatorname{MSCR}_{i}=\frac{S_{\mathrm{ac} i}}{P_{\mathrm{deqi}}}=\frac{U_{i}{ }^{2} /\left|Z_{\mathrm{eqii}}\right|}{P_{\mathrm{d} i}+\sum_{j=1, j \neq i}^{n}\left|Z_{\mathrm{eqij}} / Z_{\mathrm{eqii}}\right| P_{\mathrm{d} j}}
+\end{equation}\]</div>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>凤城-梅里2回线路投运后另行校核。 <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>直流初期可研提及，单个VSC最多可提供3.6kA的短路电流。以此计算，石牌、车坊、木渎、玉山四个站点短路电流将超标。年度方式期间，国调协调经研院研究直流侧限制VSC提供短路电流的技术手段，目标尚未有最终定论，但考虑VSC不会将全部能力提供无功电流，故障期间VSC提供的短路电流不会达到3.6kA的水平。 <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:3">
+<p>直流模型及短路电流控制方案不同可能会导致该N-2故障后直流会发生多次换相失败!!!，后续需进一步确定!!! <a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 Dr. Li Haifeng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.linktheme", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+<script src="../../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+<script src="../../javascripts/mathjaxCFG.js"></script>
+<script src="../../MathJax/tex-chtml.js"></script>
+<script src="../../javascripts/refresh_on_toggle_dark_light.js"></script>
+<script src="../../javascripts/highlight.min.js"></script>
+<script src="../../javascripts/mermaid.min.js"></script>
+<script src="../../javascripts/wavedrom_unpkg.js"></script>
+<script src="../../javascripts/wavedrom_skin_default.js"></script>
+</body>
+</html>

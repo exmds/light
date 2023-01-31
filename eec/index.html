@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://www.drlx.com/eec/" rel="canonical"/>
+<link href="../stability/GBT40615/" rel="prev"/>
+<link href="../math-model/" rel="next"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.7" name="generator"/>
+<title>EEC - Deep Reinforcement Learning</title>
+<link href="../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../css/extra.css" rel="stylesheet"/>
+<link href="../css/hint.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="light-blue" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#eec-package">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="Deep Reinforcement Learning" class="md-header__button md-logo" data-md-component="logo" href=".." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Deep Reinforcement Learning
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              EEC
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="..">
+      Home
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../stability/2022/">
+        专题分析
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="./">
+      EEC
+    </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../math-model/">
+        PowerModule
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../manual/getting-started/">
+        Julia
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../markdown/figure/">
+        Help
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../about/">
+      About
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Deep Reinforcement Learning" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Deep Reinforcement Learning">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    Deep Reinforcement Learning
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          专题分析
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          专题分析
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../stability/2022/">
+        建苏直流
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../stability/GBT40615/">
+        电力系统电压稳定评价导则
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          EEC
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        EEC
+      </a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#package-features">
+    Package Features
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started-installation-and-first-steps">
+    Getting Started: Installation And First Steps
+  </a>
+<nav aria-label="Getting Started: Installation And First Steps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#installing-from-julia">
+    Installing from Julia
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#using-eec-package">
+    Using eec package
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          PowerModule
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          PowerModule
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../math-model/">
+        The PowerModels Mathematical Model
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Julia
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Julia
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../manual/getting-started/">
+        入门
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../manual/variables/">
+        变量
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../manual/variables-and-scoping/">
+        变量作用域
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../manual/functions/">
+        函数
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../manual/unicode-input/">
+        Unicode输入表
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Help
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Help
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../markdown/figure/">
+        增加图表
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../markdown/common/">
+        常用扩展
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../markdown/txtbar/">
+        进度条
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../about/">
+        About
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="eec-package"><code class="highlight">eec</code> package<a class="headerlink" href="#eec-package" title="Permanent link">¶</a></h1>
+<p>This is a suite for polar-form-based complex calcultation written in Julia. The purpose of this package is to supply efficient Julia implementations of solvers for various operations as a supplements to the original function <code class="highlight">complex.jl</code> in <code class="highlight">Julia</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>julia --color=yes make.jl</p>
+</div>
+<h2 id="package-features">Package Features<a class="headerlink" href="#package-features" title="Permanent link">¶</a></h2>
+<p><code class="highlight">eec.jl</code> comes with built-in analysis features, including:  </p>
+<ul>
+<li><span class="twemoji twitter"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 14h-6v6h-4v-6H4v-4h6V4h4v6h6v4Z"></path></svg></span> : <span aria-label="极坐标形式的复数加法" class="tooltip hint--right hint--info hint--bounce"><span class="arithmatex">\(r_1 \angle \theta_1 \,^\circ + r_2 \angle \theta_2 \,^\circ\)</span></span> </li>
+<li><span class="twemoji medium"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 14H4v-4h16"></path></svg></span> : <span aria-label="极坐标形式的复数减法" class="tooltip hint--right hint--info hint--bounce"><span class="arithmatex">\(r_1 \angle \theta_1 \,^\circ - r_2 \angle \theta_2 \,^\circ\)</span></span> </li>
+<li><span class="twemoji facebook"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6.91 17.09 4 12 9.09 6.91 4 4 6.91 9.09 12 4 17.09 6.91 20 12 14.91 17.09 20 20 17.09 14.91 12 20 6.91Z"></path></svg></span>:  <span aria-label="极坐标形式的复数乘法" class="tooltip hint--right hint--info hint--bounce"><span class="arithmatex">\(r_1 \angle \theta_1 \,^\circ \times r_2 \angle \theta_2 \,^\circ\)</span></span> </li>
+<li><span class="twemoji google"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M272 96c0-26.5-21.5-48-48-48s-48 21.5-48 48 21.5 48 48 48 48-21.5 48-48zm0 320c0-26.5-21.5-48-48-48s-48 21.5-48 48 21.5 48 48 48 48-21.5 48-48zm128-128c17.7 0 32-14.3 32-32s-14.3-32-32-32H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h352z"></path></svg></span>: <span aria-label="极坐标形式的复数除法" class="tooltip hint--right hint--info hint--bounce"><span class="arithmatex">\(\dfrac{r_1 \angle \theta_1 \,^\circ}{r_2 \angle \theta_2 \,^\circ}\)</span></span> </li>
+<li><span class="arithmatex">\(a+b,\,a-b,\,a\times\,b,\,\dfrac{a}{b}\)</span>: where <span aria-label="eec package不仅实现了上述极坐标形式复数的加减乘除，而且还做了扩展，其中a,b可以是数字或复数。如果是复数的话，既可以使用直角坐标形式，也可以使用极坐标形式" class="tooltip hint--top hint--success hint--bounce"><span class="arithmatex">\(a,b\)</span></span> can be a <code class="highlight">Number</code> or a <code class="highlight">Complex</code>. If it's a <code class="highlight">Complex</code>, it can have the rectangular form <mark><span class="arithmatex">\(x + y\,{\rm im}\)</span></mark><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> or polar form <mark><span class="arithmatex">\(r \angle \theta \,^\circ\)</span></mark>.</li>
+<li>converting rectangular form <mark><span class="arithmatex">\(x + y\,{\rm im}\)</span></mark> into polar form <mark><span class="arithmatex">\(r \angle \theta \,^\circ\)</span></mark> with function: <code class="highlight">xy2rs()</code> </li>
+<li>converting polar form <mark><span class="arithmatex">\(r \angle \theta \,^\circ\)</span></mark> into rectangular form <mark><span class="arithmatex">\(x + y\,{\rm im}\)</span></mark> with function: <code class="highlight">rs2xy()</code> </li>
+<li>show complex in polar form, such as: <span class="arithmatex">\(r \angle \theta \,^\circ\)</span> </li>
+<li>show complex in common form in Electric and Electronics engineering: <span class="arithmatex">\(x + y\,{\rm j}\)</span> </li>
+<li><code class="highlight">conj()</code> to get <mark><span class="arithmatex">\(r \angle \!-\! \theta \,^\circ\)</span></mark> </li>
+</ul>
+<h2 id="getting-started-installation-and-first-steps">Getting Started: Installation And First Steps<a class="headerlink" href="#getting-started-installation-and-first-steps" title="Permanent link">¶</a></h2>
+<h3 id="installing-from-julia">Installing from Julia<a class="headerlink" href="#installing-from-julia" title="Permanent link">¶</a></h3>
+<p>To install the package, use the following command inside the <code class="highlight">Julia</code> <span aria-label="Read-Eval-Print Loop" class="tooltip hint--top hint--info">REPL</span>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Julia-REPL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="p">]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="go">(@v1.7) pkg&gt; add eec</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="using-eec-package">Using <code class="highlight">eec</code> package<a class="headerlink" href="#using-eec-package" title="Permanent link">¶</a></h3>
+<p>To load the package, use the command:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Julia-REPL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">eec</span><span class="o">:</span><span class="w"> </span><span class="n">eeComplex</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">rs</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">45</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="hll"><span class="go">12∠45°</span>
+</span><a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">typeof</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="hll"><span class="go">eec.eeComplex</span>
+</span><a id="__codelineno-1-8" name="__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">4.0</span><span class="nb">im</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="hll"><span class="go">3.0 + 4.0j</span>
+</span><a id="__codelineno-1-11" name="__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">typeof</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="hll"><span class="go">ComplexF64 (alias for Complex{Float64})</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> 电力系统工程中，很多场合使用基于极坐标形式的复数计算，比如：潮流求解、短路电流计算、PMU量测等，而且大多数时候也习惯采用极坐标的形式 <span class="arithmatex">\(r \angle \theta \,^\circ\)</span> 表示数值和计算结果；即便使用直角坐标形式表示复数，虚数单位也习惯使用<span class="arithmatex">\(j\)</span>或<span class="arithmatex">\(i\)</span>。但目前还未见有合适的软件直观地完成以上工作。<code class="highlight">Maple</code>软件可以通过自定义符号面板实现部分功能，但并不理想，另外该软件是商用软件，需要付费使用，并不是十分方便。鉴于开源编程语言<code class="highlight">Julia</code>兼顾了计算速度、灵活性等优点。自行开发了<code class="highlight">eec</code>软件包，该软件包完全采用高性能计算语言<code class="highlight">Julia</code>编写，充分利用了<code class="highlight">Julia</code>支持的多重派发等特性，既实现了基于极坐标形式的复数计算，也重新定义了复数的输出和显示形式，在使用上满足了工程习惯，同时也可以作为<code class="highlight">Julia</code>自带<code class="highlight">complex.jl</code>模块的补充。 <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p><code class="highlight">Julia</code>中虚数单位默认使用<span class="arithmatex">\(\rm{im}\)</span>。 <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 Dr. Li Haifeng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tabs.linktheme", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+<script src="../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+<script src="../javascripts/mathjaxCFG.js"></script>
+<script src="../MathJax/tex-chtml.js"></script>
+<script src="../javascripts/refresh_on_toggle_dark_light.js"></script>
+<script src="../javascripts/highlight.min.js"></script>
+<script src="../javascripts/mermaid.min.js"></script>
+<script src="../javascripts/wavedrom_unpkg.js"></script>
+<script src="../javascripts/wavedrom_skin_default.js"></script>
+</body>
+</html>
